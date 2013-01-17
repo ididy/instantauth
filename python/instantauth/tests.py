@@ -7,6 +7,7 @@ from instantauth.verifiers import BypassVerifier
 from instantauth.verifiers.timehash import TimeHashVerifier
 from instantauth.coders.urlquery import URLQueryCoder, SimpleURLQueryCoder
 from instantauth.coders.json import JsonCoder
+from instantauth.flask import FlaskAuthentication
 
 session = {'id':0}
 
@@ -73,8 +74,9 @@ assert context.data == data
 
 
 env = Environment(AESCryptor(128), verifier, SimpleURLQueryCoder())
-auth = Authentication(env, TestSessionHandler(), 'SECRET')
+auth = FlaskAuthentication(env, TestSessionHandler(), 'SECRET')
 encrypted = auth.build_data(session, data)
 
 context = auth.get_context(encrypted)
 assert context.data == data
+

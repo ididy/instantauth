@@ -27,7 +27,7 @@ def cut_key(key, block_size):
 
 
 class AESCryptor(BaseCryptor):
-    def __init__(self, bits, iv=chr(0) * 16): # iv is useless for temporary data in usual case
+    def __init__(self, bits=128, iv=chr(0) * 16): # iv is useless for temporary data in usual case
         if not bits in (128, 192, 256):
             raise ValueError(bits) # make one
         self.block_size = bits / 8
