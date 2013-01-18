@@ -18,11 +18,14 @@ class Verifier(object):
 
 
 class BypassVerifier(Verifier):
+    def __init__(self, public_key='public_key'):
+        self.public_key = public_key
+
     def divide_verifier_data(self, raw_data, secret_key):
         return '', raw_data
 
     def public_key_from_verifier(self, verifier, secret_key):
-        return 'key'
+        return self.public_key
 
     def verify(self, verifier, private_key, secret_key):
         return True

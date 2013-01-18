@@ -11,13 +11,26 @@ class Authentication(object):
         self.session_handler = session_handler
         self.secret_key = secret_key
 
+    def get_first_context(self, data):
+        decrypted = self.env.cryptor.decrypt_global(data, self.secret_key)
+        verifier, encrypted_data = self.env.verifier.divide_verifier_data(decrypted, self.secret_key)
+        public_key = self.env.verifier.public_key_from_verifier(verifier, self.secret_key)
+        raw_data = self.env.cryptor.decrypt_data(encrypted_data, self.secret_key, self.secret_key)
+        semantic_data = self.env.coder.decode(raw_data)
+        context = Context(None, semantic_data)
+        context.key = public_key
+        return context
+
     def get_context(self, data):
         decrypted = self.env.cryptor.decrypt_global(data, self.secret_key)
         verifier, encrypted_data = self.env.verifier.divide_verifier_data(decrypted, self.secret_key)
         public_key = self.env.verifier.public_key_from_verifier(verifier, self.secret_key)
         if not public_key:
             raise AuthenticationError
-        session = self.session_handler.session_from_public_key(public_key)
+        try:
+            session = self.session_handler.session_from_public_key(public_key)
+        except KeyError:
+            raise AuthenticationError
         if not session:
             raise AuthenticationError
         private_key = self.session_handler.get_private_key(session)
