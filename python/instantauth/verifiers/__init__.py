@@ -1,6 +1,8 @@
 
 
 class Verifier(object):
+    derived_context = {}
+
     def divide_verifier_data(self, raw_data, secret_key):
         raise NotImplementedError
 

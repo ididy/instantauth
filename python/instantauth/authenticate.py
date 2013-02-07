@@ -11,6 +11,14 @@ class Authentication(object):
         self.session_handler = session_handler
         self.secret_key = secret_key
 
+    def _merge_context(self, context):
+        for k, v in self.env.cryptor.derived_context.items():
+            setattr(context, k, v)
+        for k, v in self.env.verifier.derived_context.items():
+            setattr(context, k, v)
+        for k, v in self.env.coder.derived_context.items():
+            setattr(context, k, v)
+
     def get_first_context(self, data):
         decrypted = self.env.cryptor.decrypt_global(data, self.secret_key)
         verifier, encrypted_data = self.env.verifier.divide_verifier_data(decrypted, self.secret_key)
@@ -19,6 +27,7 @@ class Authentication(object):
         semantic_data = self.env.coder.decode(raw_data)
         context = Context(None, semantic_data)
         context.auth_key = public_key
+        self._merge_context(context)
         return context
 
     def get_context(self, data):
@@ -38,7 +47,9 @@ class Authentication(object):
             raise AuthenticationError
         raw_data = self.env.cryptor.decrypt_data(encrypted_data, self.secret_key, private_key)
         semantic_data = self.env.coder.decode(raw_data)
-        return Context(session, semantic_data)
+        context = Context(session, semantic_data)
+        self._merge_context(context)
+        return context
 
     def build_data(self, session, data):
         private_key = self.session_handler.get_private_key(session)

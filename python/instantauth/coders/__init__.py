@@ -1,5 +1,7 @@
 
 class BaseCoder(object):
+    derived_context = {}
+
     def encode(self, data):
         raise NotImplementedError
 

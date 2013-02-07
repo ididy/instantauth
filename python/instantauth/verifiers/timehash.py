@@ -26,7 +26,11 @@ class TimeHashVerifier(Verifier):
         timehex = others[:8]
         hexhash = others[8:]
         check_hexhash = timehash(private_key, public_key, timehex)
-        return hexhash == check_hexhash
+        if not hexhash == check_hexhash:
+            return False
+        given_time = int(timehex, 16)
+        self.derived_context = {'time': given_time}
+        return -self.__pastlimit <= time.time() - given_time <= self.__futurelimit
 
     def merge_verifier_data(self, verifier, raw_data, secret_key):
         return '$'.join((verifier, raw_data))

@@ -1,5 +1,7 @@
 
 class BaseCryptor(object):
+    derived_context = {}
+
     def encrypt_global(self, stream, secret_key):
         raise NotImplementedError
 
