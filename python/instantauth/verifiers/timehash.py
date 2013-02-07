@@ -11,8 +11,8 @@ def timehash(private_key, public_key, hextime):
     return m.hexdigest()
 
 class TimeHashVerifier(Verifier):
-    __futurelimit = 180
-    __pastlimit = 300
+    def __init__(self, limits=(300, 180)):
+        self.__pastlimit, self.__futurelimit = limits
 
     def divide_verifier_data(self, raw_data, secret_key):
         return raw_data.rsplit('$', 1)
@@ -41,3 +41,4 @@ class TimeHashVerifier(Verifier):
         hextime = '%8x' % inow
         hexhash = timehash(private_key, public_key, hextime)
         return ''.join((public_key, '$', hextime, hexhash))
+
