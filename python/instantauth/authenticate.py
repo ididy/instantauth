@@ -18,7 +18,7 @@ class Authentication(object):
         raw_data = self.env.cryptor.decrypt_data(encrypted_data, self.secret_key, self.secret_key)
         semantic_data = self.env.coder.decode(raw_data)
         context = Context(None, semantic_data)
-        context.key = public_key
+        context.auth_key = public_key
         return context
 
     def get_context(self, data):
