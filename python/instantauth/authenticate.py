@@ -51,7 +51,7 @@ class Authentication(object):
         self._merge_context(context)
         return context
 
-    def build_data(self, session, data):
+    def build_data(self, data, session):
         private_key = self.session_handler.get_private_key(session)
         public_key = self.session_handler.get_public_key(session)
         coded_data = self.env.coder.encode(data)

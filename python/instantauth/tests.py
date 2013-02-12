@@ -65,7 +65,7 @@ env = Environment(PlainCryptor(), verifier, SimpleURLQueryCoder())
 auth = Authentication(env, TestSessionHandler(), 'SECRET')
 
 data = {'field': 'value'}
-encrypted = auth.build_data(session, data)
+encrypted = auth.build_data(data, session)
 assert encrypted.startswith('public_key')
 assert '$' in encrypted
 
@@ -75,7 +75,7 @@ assert context.data == data
 
 env = Environment(AESCryptor(128), verifier, SimpleURLQueryCoder())
 auth = FlaskAuthentication(env, TestSessionHandler(), 'SECRET')
-encrypted = auth.build_data(session, data)
+encrypted = auth.build_data(data, session)
 
 context = auth.get_context(encrypted)
 assert context.data == data
