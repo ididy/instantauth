@@ -1,6 +1,6 @@
 
 import time
-from instantauth import Authentication, Environment, SessionHandler
+from instantauth import Authentication, SessionHandler
 from instantauth.cryptors import PlainCryptor
 from instantauth.cryptors.aes import AESCryptor
 from instantauth.verifiers import BypassVerifier
@@ -21,8 +21,7 @@ class TestSessionHandler(SessionHandler):
     def get_private_key(self, session):
         return 'private_key'
 
-env = Environment(PlainCryptor(), BypassVerifier(), URLQueryCoder())
-auth = Authentication(env, TestSessionHandler(), 'SECRET')
+auth = Authentication(PlainCryptor(), BypassVerifier(), URLQueryCoder(), TestSessionHandler(), 'SECRET')
 
 data = ''
 context = auth.get_context(data)
@@ -36,15 +35,13 @@ data = 'field=value&field=value'
 context = auth.get_context(data)
 assert context.data == {'field': ['value', 'value']}
 
-env = Environment(PlainCryptor(), BypassVerifier(), SimpleURLQueryCoder())
-auth = Authentication(env, TestSessionHandler(), 'SECRET')
+auth = Authentication(PlainCryptor(), BypassVerifier(), SimpleURLQueryCoder(), TestSessionHandler(), 'SECRET')
 
 data = 'field=value'
 context = auth.get_context(data)
 assert context.data == {'field': 'value'}
 
-env = Environment(PlainCryptor(), BypassVerifier(), JsonCoder())
-auth = Authentication(env, TestSessionHandler(), 'SECRET')
+auth = Authentication(PlainCryptor(), BypassVerifier(), JsonCoder(), TestSessionHandler(), 'SECRET')
 
 data = '{"field": "value"}'
 context = auth.get_context(data)
@@ -61,8 +58,7 @@ class KeyCheckSessionHandler(SessionHandler):
         return private_key
 
 verifier = TimeHashVerifier()
-env = Environment(PlainCryptor(), verifier, SimpleURLQueryCoder())
-auth = Authentication(env, TestSessionHandler(), 'SECRET')
+auth = Authentication(PlainCryptor(), verifier, SimpleURLQueryCoder(), TestSessionHandler(), 'SECRET')
 
 data = {'field': 'value'}
 encrypted = auth.build_data(data, session)
@@ -73,8 +69,7 @@ context = auth.get_context(encrypted)
 assert context.data == data
 
 
-env = Environment(AESCryptor(128), verifier, SimpleURLQueryCoder())
-auth = FlaskAuthentication(env, TestSessionHandler(), 'SECRET')
+auth = FlaskAuthentication(AESCryptor(128), verifier, SimpleURLQueryCoder(), TestSessionHandler(), 'SECRET')
 encrypted = auth.build_data(data, session)
 
 context = auth.get_context(encrypted)
