@@ -8,9 +8,23 @@ class BaseCoder(object):
     def decode(self, data):
         raise NotImplementedError
 
-class BlankCoder(object):
+
+class ConstantCoder(object):
+    def __init__(self, encoded='', decoded={}):
+        self.encoded = encoded
+        self.decoded = decoded
+
     def encode(self, data):
-        return {}
+        return self.encoded
 
     def decode(self, data):
-        return {}
+        return self.decoded
+
+BlankCoder = ConstantCoder
+
+class PlainCoder(object):
+    def encode(self, data):
+        return data
+
+    def decode(self, data):
+        return data

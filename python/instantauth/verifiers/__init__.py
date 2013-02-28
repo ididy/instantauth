@@ -1,67 +1,77 @@
 
+from collections import namedtuple
+
+DividedData = namedtuple('DividedData', ('verification', 'data'))
+DestructedData = namedtuple('DestructedData', ('public_key', 'verification', 'data'))
+
 
 class Verifier(object):
     derived_context = {}
 
-    def divide_verifier_data(self, raw_data, secret_key):
+    def divide_verification_and_data(self, raw_data, secret_key):
+        raise NotImplementedError
+        return DividedData(None, None) # expected interface
+
+    def public_key_from_verification(self, verification, secret_key):
         raise NotImplementedError
 
-    def public_key_from_verifier(self, verifier, secret_key):
+    def destruct_data(self, raw_data, secret_key):
+        vnd = self.divide_verification_and_data(raw_data, secret_key)
+        public_key = self.public_key_from_verification(vnd.verification, secret_key)
+        return DestructedData(public_key, vnd.verification, vnd.data)
+
+    def destruct_first_data(self, raw_data, secret_key):
+        return self.destruct_data(raw_data)
+
+    def verify(self, verification, private_key, secret_key):
         raise NotImplementedError
 
-    def verify(self, verifier, private_key, secret_key):
+    def encode_verification(self, private_key, public_key, secret_key):
         raise NotImplementedError
 
-    def encode_verifier(self, private_key, public_key, secret_key):
+    def merge_verification_data(self, verification, raw_data, secret_key):
         raise NotImplementedError
-    
-    def merge_verifier_data(self, verifier, raw_data, secret_key):
-        raise NotImplementedError
+
+    def construct_data(self, raw_data, private_key, public_key, secret_key):
+        verification = self.encode_verification(private_key, public_key, secret_key)
+        data = self.merge_verification_data(verification, raw_data, secret_key)
+        return data
 
 
 class BypassVerifier(Verifier):
     def __init__(self, public_key='public_key'):
         self.public_key = public_key
 
-    def divide_verifier_data(self, raw_data, secret_key):
-        return '', raw_data
+    def divide_verification_and_data(self, raw_data, secret_key):
+        return DividedData(None, raw_data)
 
-    def public_key_from_verifier(self, verifier, secret_key):
+    def public_key_from_verification(self, verification, secret_key):
         return self.public_key
 
-    def verify(self, verifier, private_key, secret_key):
+    def verify(self, verification, private_key, secret_key):
         return True
 
-    def encode_verifier(self, private_key, public_key, secret_key):
-        return ''
-    
-    def merge_verifier_data(self, verifier, raw_data, secret_key):
+    def encode_verification(self, private_key, public_key, secret_key):
+        return None
+
+    def merge_verification_data(self, verification, raw_data, secret_key):
         return raw_data
+
 
 class DataKeyVerifier(Verifier):
     def __init__(self, coder, key):
         self.coder = coder
         self.key = key
 
-    def divide_verifier_data(self, raw_data, secret_key):
-        return self.coder.decode(raw_data), raw_data
+    def destruct_data(self, raw_data, secret_key):
+        decoded_data = self.coder.decode(raw_data)
+        verification = decoded_data[self.key]
+        return DestructedData(verification, verification, raw_data)
 
-    def public_key_from_verifier(self, verifier, secret_key):
-        try:
-            return getattr(verifier, self.key)
-        except:
-            return verifier[self.key]
-
-    def verify(self, verifier, private_key, secret_key):
+    def verify(self, verification, private_key, secret_key):
         return True
 
-    def encode_verifier(self, private_key, public_key, secret_key):
-        return public_key
-    
-    def merge_verifier_data(self, verifier, raw_data, secret_key):
-        try:
-            setattr(raw_data, self.key, verifier)
-        except:
-            raw_data[self.key] = verifier
-
-
+    def construct_data(self, data, private_key, public_key, secret_key):
+        decoded = self.coder.decode(data)
+        decoded[self.key] = public_key
+        return self.coder.encode(decoded)

@@ -46,14 +46,14 @@ class AESCryptor(BaseCryptor):
         decrypted = cipher.decrypt(stream)
         return strip_padding(decrypted)
 
-    def encrypt_data(self, data, secret_key, private_key):
+    def encrypt_data(self, data, private_key, secret_key):
         secret_key = cut_key(private_key, self.block_size)
         cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
         padded = add_padding(data, self.block_size)
         encrypted = cipher.encrypt(padded)
         return encrypted
 
-    def decrypt_data(self, data, secret_key, private_key):
+    def decrypt_data(self, data, private_key, secret_key):
         secret_key = cut_key(private_key, self.block_size)
         cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
         decrypted = cipher.decrypt(data)
