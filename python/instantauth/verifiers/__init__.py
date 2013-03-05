@@ -23,7 +23,7 @@ class Verifier(object):
     def destruct_first_data(self, raw_data, secret_key):
         return self.destruct_data(raw_data, secret_key)
 
-    def verify(self, verification, private_key, secret_key):
+    def verify(self, destructd, private_key, secret_key):
         raise NotImplementedError
 
     def encode_verification(self, private_key, public_key, secret_key):
@@ -51,7 +51,7 @@ class BypassVerifier(Verifier):
     def public_key_from_verification(self, verification, secret_key):
         return self.public_key
 
-    def verify(self, verification, private_key, secret_key):
+    def verify(self, destructed, private_key, secret_key):
         return True
 
     def encode_verification(self, private_key, public_key, secret_key):
@@ -62,6 +62,7 @@ class BypassVerifier(Verifier):
 
 
 class DataKeyVerifier(Verifier):
+    """Supposed to used with PlainCoder"""
     def __init__(self, coder, key):
         self.coder = coder
         self.key = key
@@ -69,12 +70,11 @@ class DataKeyVerifier(Verifier):
     def destruct_data(self, raw_data, secret_key):
         decoded_data = self.coder.decode(raw_data)
         verification = decoded_data[self.key]
-        return DestructedData(verification, verification, raw_data)
+        return DestructedData(verification, verification, decoded_data)
 
     def verify(self, verification, private_key, secret_key):
         return True
 
     def construct_data(self, data, private_key, public_key, secret_key):
-        decoded = self.coder.decode(data)
-        decoded[self.key] = public_key
-        return self.coder.encode(decoded)
+        data[self.key] = public_key
+        return self.coder.encode(data)

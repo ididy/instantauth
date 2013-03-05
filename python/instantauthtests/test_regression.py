@@ -5,6 +5,7 @@ from instantauth.cryptors import PlainCryptor
 from instantauth.cryptors.aes import AESCryptor
 from instantauth.verifiers import BypassVerifier, DataKeyVerifier
 from instantauth.verifiers.timehash import TimeHashVerifier
+from instantauth.coders import PlainCoder
 from instantauth.coders.urlquery import URLQueryCoder, SimpleURLQueryCoder
 from instantauth.coders.json import JsonCoder
 from instantauth.flask import FlaskAuthentication
@@ -44,7 +45,7 @@ def test_plain_bypass_simpleurlquery():
     assert context.data == {'field': 'value'}
 
 def test_plain_datakey_json():
-    auth = Authentication(PlainCryptor(), DataKeyVerifier(JsonCoder(), 'session'), JsonCoder(), TestSessionHandler(), 'SECRET')
+    auth = Authentication(PlainCryptor(), DataKeyVerifier(JsonCoder(), 'session'), PlainCoder(), TestSessionHandler(), 'SECRET')
 
     data = '{"field": "value", "session": "1"}'
     context = auth.get_context(data)
