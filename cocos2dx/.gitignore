@@ -1,0 +1,10 @@
+build
+cocos2d-x
+rapidjson
+openssl
+
+*.xcodeproj/*.mode1v3                                                                      
+*.xcodeproj/*.pbxuser                                                                      
+*.xcodeproj/*.perspectivev3                                                                
+*.xcodeproj/xcuserdata/*.xcuserdatad
+*.xcodeproj/project.xcworkspace

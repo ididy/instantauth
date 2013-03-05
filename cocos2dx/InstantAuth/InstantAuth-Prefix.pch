@@ -1,0 +1,13 @@
+//
+// Prefix header for all source files of the 'InstantAuth' target in the 'InstantAuth' project
+//
+
+#ifdef __cplusplus
+
+#include "cocos2d.h"
+#include "CCBReader/CCData.h"
+
+using namespace cocos2d;
+using namespace extension;
+
+#endif
