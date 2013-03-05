@@ -21,7 +21,7 @@ class Verifier(object):
         return DestructedData(public_key, vnd.verification, vnd.data)
 
     def destruct_first_data(self, raw_data, secret_key):
-        return self.destruct_data(raw_data)
+        return self.destruct_data(raw_data, secret_key)
 
     def verify(self, verification, private_key, secret_key):
         raise NotImplementedError
@@ -36,6 +36,9 @@ class Verifier(object):
         verification = self.encode_verification(private_key, public_key, secret_key)
         data = self.merge_verification_data(verification, raw_data, secret_key)
         return data
+
+    def construct_first_data(self, raw_data, session_key, secret_key):
+        return self.construct_data(raw_data, secret_key, session_key, secret_key)
 
 
 class BypassVerifier(Verifier):

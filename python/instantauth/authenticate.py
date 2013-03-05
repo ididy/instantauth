@@ -20,7 +20,7 @@ class Authentication(object):
         for k, v in self.coder.derived_context.items():
             setattr(context, k, v)
 
-    def get_first_context(self, data):
+    def get_first_context(self, data, type=None):
         """
         Decode process:
 
@@ -42,10 +42,10 @@ class Authentication(object):
         #1: data
         decrypted = self.cryptor.decrypt_global(data, self.secret_key) #2
         destructed = self.verifier.destruct_first_data(decrypted, self.secret_key) #3
-        raw_data = self.cryptor.decrypt_first_data(encrypted_data, self.secret_key, self.secret_key) #4
+        raw_data = self.cryptor.decrypt_first_data(destructed.data, self.secret_key) #4
         semantic_data = self.coder.decode(raw_data) #5
         context = Context(None, semantic_data)
-        context.session_key = public_key
+        context.session = self.session_handler.session_from_session_key(destructed.public_key, type)
         self._merge_context(context)
         return context
 
@@ -97,7 +97,7 @@ class Authentication(object):
         #1 data
         coded_data = self.coder.encode(data) #2
         encrypted_data = self.cryptor.encrypt_first_data(coded_data, self.secret_key) #3
-        merged_data = self.verifier.construct_first_data(encrypted_data, private_key, public_key, self.secret_key) #4
+        merged_data = self.verifier.construct_first_data(encrypted_data, session_key, self.secret_key) #4
         encrypted = self.cryptor.encrypt_global(merged_data, self.secret_key) #5
         return encrypted
 
