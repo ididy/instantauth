@@ -208,6 +208,7 @@
 		384FF38716E77DD60066139A /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384FD8F516E747E50066139A /* libcocos2dx.a */; };
 		384FF38816E77E220066139A /* CCFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FDA3C16E748540066139A /* CCFileUtils.cpp */; };
 		384FF38B16E77E520066139A /* ioapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF37E16E77D7D0066139A /* ioapi.cpp */; };
+		3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3893C13D16EDD5EF00F7E779 /* SHA1.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -746,6 +747,8 @@
 		384FF37F16E77D7D0066139A /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
 		384FF38016E77D7D0066139A /* unzip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unzip.cpp; sourceTree = "<group>"; };
 		384FF38116E77D7D0066139A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		3893C13D16EDD5EF00F7E779 /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
+		3893C13E16EDD5EF00F7E779 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -791,6 +794,7 @@
 				384FF37716E77C270066139A /* libz.dylib */,
 				384FF37516E77C1A0066139A /* OpenGLES.framework */,
 				384FF37316E77C0B0066139A /* CoreGraphics.framework */,
+				3893C13C16EDD5EF00F7E779 /* sha */,
 				384FD8A116E602FB0066139A /* InstantAuth */,
 				384FD8B616E602FB0066139A /* InstantAuthTests */,
 				384FD90116E748530066139A /* cocos2d-x */,
@@ -1791,6 +1795,15 @@
 			path = zip_support;
 			sourceTree = "<group>";
 		};
+		3893C13C16EDD5EF00F7E779 /* sha */ = {
+			isa = PBXGroup;
+			children = (
+				3893C13D16EDD5EF00F7E779 /* SHA1.cpp */,
+				3893C13E16EDD5EF00F7E779 /* SHA1.h */,
+			);
+			path = sha;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1909,6 +1922,7 @@
 			files = (
 				384FD8EC16E7396C0066139A /* RapidJsonCoder.cpp in Sources */,
 				384FF37216E77BC00066139A /* TimeHashVerifier.cpp in Sources */,
+				3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2342,6 +2356,7 @@
 				384FD90016E747E50066139A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
