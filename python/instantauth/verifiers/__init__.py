@@ -73,7 +73,7 @@ class DataKeyVerifier(Verifier):
         return DestructedData(verification, verification, decoded_data)
 
     def verify(self, verification, private_key, secret_key):
-        return True
+        return verification
 
     def construct_data(self, data, private_key, public_key, secret_key):
         data[self.key] = public_key
