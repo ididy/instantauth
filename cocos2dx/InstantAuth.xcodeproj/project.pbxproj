@@ -209,6 +209,7 @@
 		384FF38816E77E220066139A /* CCFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FDA3C16E748540066139A /* CCFileUtils.cpp */; };
 		384FF38B16E77E520066139A /* ioapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF37E16E77D7D0066139A /* ioapi.cpp */; };
 		3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3893C13D16EDD5EF00F7E779 /* SHA1.cpp */; };
+		38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -749,6 +750,8 @@
 		384FF38116E77D7D0066139A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		3893C13D16EDD5EF00F7E779 /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
 		3893C13E16EDD5EF00F7E779 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
+		38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCInstantAuthSession.cpp; sourceTree = "<group>"; };
+		38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCInstantAuthSession.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +830,8 @@
 			isa = PBXGroup;
 			children = (
 				384FD8A416E602FB0066139A /* CCInstantAuth.h */,
+				38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */,
+				38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */,
 				384FD8D916E669C50066139A /* CCInstantAuthProtocol.h */,
 				384FD8EB16E7396C0066139A /* RapidJsonCoder.h */,
 				384FD8EA16E7396C0066139A /* RapidJsonCoder.cpp */,
@@ -1923,6 +1928,7 @@
 				384FD8EC16E7396C0066139A /* RapidJsonCoder.cpp in Sources */,
 				384FF37216E77BC00066139A /* TimeHashVerifier.cpp in Sources */,
 				3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */,
+				38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
