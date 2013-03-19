@@ -12,7 +12,7 @@ namespace cocos2d { namespace extension {
 
     CCHttpRequest *_qrequest(std::string& url, std::string& data) {
         CCHttpRequest *request = new CCHttpRequest::CCHttpRequest();
-        request->setUrl(data.c_str());
+        request->setUrl(url.c_str());
         request->setRequestType(CCHttpRequest::kHttpPost);
         request->setRequestData(data.c_str(), data.length());
         return request;

@@ -33,6 +33,14 @@ namespace cocos2d { namespace extension {
         CCInstantAuth *auth() {
             return this->_auth;
         }
+
+        CCString *cc_session_id() {
+            return new CCString(this->_session_id.c_str());
+        }
+
+        CCString *cc_private_key() {
+            return new CCString(this->_private_key.c_str());
+        }
     };
 
 } }
