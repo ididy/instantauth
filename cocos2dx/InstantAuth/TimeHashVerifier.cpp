@@ -30,7 +30,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         int verification_len = public_key->length() + 1 + 8 + hexhash_len;
         char verification[verification_len + 1];
         sprintf(verification, "%s$%8lx%s", public_key->getCString(), now, hexhashhex);
-        CCData *data = new CCData((unsigned char *)verification, verification_len);
+        CCData *data = new CCData(new CCData((unsigned char *)verification, verification_len));
         //data->autorelease();
         return data;
     }
@@ -40,7 +40,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         char buffer[bufferlen + 1];
         buffer[bufferlen] = 0;
         sprintf(buffer, "%s$%s", verification->getBytes(), data->getBytes());
-        CCData *mdata = new CCData((unsigned char *)buffer, bufferlen);
+        CCData *mdata = new CCData(new CCData((unsigned char *)buffer, bufferlen));
         //mdata->autorelease();
         return mdata;
     }

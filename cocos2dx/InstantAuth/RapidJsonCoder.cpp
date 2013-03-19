@@ -20,7 +20,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         rapidjson::StringBuffer buffer;
         rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
         v->Accept(writer);
-        return new CCData((unsigned char *)buffer.GetString(), buffer.GetSize());
+        return new CCData(new CCData((unsigned char *)buffer.GetString(), buffer.GetSize()));
     }
 
     //----

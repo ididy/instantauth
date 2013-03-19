@@ -42,10 +42,8 @@ namespace cocos2d { namespace extension {
         CCData *ccdata = this->auth()->build_data(data, this);
         std::string sdata((const char *)ccdata->getBytes(), (const char *)ccdata->getBytes() + ccdata->getSize());
 
-        CCHttpRequest *request = new CCHttpRequest::CCHttpRequest();
-        request->setUrl(url.c_str());
-        request->setRequestType(CCHttpRequest::kHttpPost);
-        request->setRequestData(sdata.c_str(), sdata.length());
+        CCHttpRequest *request = _qrequest(url, sdata);
+        new CCHttpRequest::CCHttpRequest();
         request->setResponseCallback(pTarget, pSelector);
 
         return request;
