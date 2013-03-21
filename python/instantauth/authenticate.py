@@ -5,10 +5,11 @@ class AuthenticationError(PrettyException):
     pass
 
 class Authentication(object):
-    def __init__(self, cryptor, verifier, coder, session_handler, secret_key):
+    def __init__(self, cryptor, verifier, datacoder, session_handler, secret_key):
+        #self.streamcoder = streamcoder
         self.cryptor = cryptor
         self.verifier = verifier
-        self.coder = coder
+        self.coder = datacoder
         self.session_handler = session_handler
         self.secret_key = secret_key
 
