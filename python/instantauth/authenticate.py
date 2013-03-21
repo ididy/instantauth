@@ -29,9 +29,9 @@ class Authentication(object):
                     cryptor
                        V
         | #2 Receiver-Decrypted Raw Data | --verifier--> | Public Key |
-                      |                                        |
-                   verifier                                    V
-                      V                                        |
+                       |                                       |
+                    verifier                                   V
+                       V                                       |
           | #3 Sender-Encrypted Data | ---------->-------------+
                                                                |
                                                             cryptor
