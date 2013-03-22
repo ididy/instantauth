@@ -1,8 +1,5 @@
 
-from prettyexc import PrettyException
-
-class AuthenticationError(PrettyException):
-    pass
+from .exceptions import *
 
 class Authentication(object):
     def __init__(self, cryptor, verifier, datacoder, session_handler, secret_key):

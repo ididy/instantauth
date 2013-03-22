@@ -2,6 +2,13 @@
 import time
 import hashlib
 from . import Verifier, DividedData
+from ..exceptions import *
+
+class AuthenticationHashInvalid(AuthenticationError):
+    pass
+
+class AuthenticationExpired(AuthenticationError):
+    pass
 
 def timehash(private_key, public_key, hextime):
     m = hashlib.sha1()
@@ -29,10 +36,12 @@ class TimeHashVerifier(Verifier):
         hexhash = others[8:]
         check_hexhash = timehash(private_key, public_key, timehex)
         if not hexhash == check_hexhash:
-            return False
+            raise AuthenticationHashInvalid
         given_time = int(timehex, 16)
         self.derived_context = {'time': given_time}
-        return -self.__pastlimit <= self.now() - given_time <= self.__futurelimit
+        if not -self.__pastlimit <= self.now() - given_time <= self.__futurelimit:
+            raise AuthenticationExpired
+        return True
 
     def merge_verification_data(self, verification, raw_data, secret_key):
         return '$'.join((verification, raw_data))
