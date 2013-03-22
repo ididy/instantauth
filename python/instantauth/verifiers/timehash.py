@@ -4,6 +4,9 @@ import hashlib
 from . import Verifier, DividedData
 from ..exceptions import *
 
+class AuthenticationFormatCorrupted(AuthenticationError):
+    pass
+
 class AuthenticationHashInvalid(AuthenticationError):
     pass
 
@@ -23,11 +26,17 @@ class TimeHashVerifier(Verifier):
         self.now = now
 
     def divide_verification_and_data(self, raw_data, secret_key):
-        vals = raw_data.rsplit('$', 1)
+        try:
+            vals = raw_data.rsplit('$', 1)
+        except ValueError:
+            raise AuthenticationFormatCorrupted
         return DividedData(vals[0], vals[1])
 
     def public_key_from_verification(self, verification, secret_key):
-        public_key, others = verification.split('$', 1)
+        try:
+            public_key, others = verification.split('$', 1)
+        except ValueError:
+            raise AuthenticationFormatCorrupted
         return public_key
 
     def verify(self, destructed, private_key, secret_key):
