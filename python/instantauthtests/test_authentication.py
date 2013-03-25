@@ -38,7 +38,7 @@ from instantauth import Authentication
 @pytest.mark.parametrize(('cryptor', 'verifier', 'coder', 'sessionhandler'), combinations)
 def test_authentication(cryptor, verifier, coder, sessionhandler, secret='SECRET'):
     """Round-trip test"""
-    authentication = Authentication(cryptor, verifier, coder, sessionhandler, secret)
+    authentication = Authentication(PlainCoder(), cryptor, verifier, coder, sessionhandler, secret)
     i = {'f1':'v1'}
     
     d = authentication.build_first_data(i, '1')
