@@ -11,7 +11,7 @@ aes = AESCryptor(256)
 
 @pytest.mark.parametrize(('cryptor', 'testcase'), [
     (plain, {'test': {'global': 'test', 'data': 'test'}}),
-    (aes, {'test': {'global': 'rL5QWh1u1DPB5S96LQV9qtgawlpTcBYO5VsTWhIWbfI='}}),
+    (aes, {'test': {'global': 'ZmD83NYDIuGOHae0lEXHdg=='}}),
 ])
 def test_cryptor(cryptor, testcase, private_key='PRIVATE', secret='SECRET'):
     """Round-trip test"""

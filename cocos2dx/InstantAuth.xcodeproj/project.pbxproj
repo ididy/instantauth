@@ -210,6 +210,9 @@
 		384FF38B16E77E520066139A /* ioapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF37E16E77D7D0066139A /* ioapi.cpp */; };
 		3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3893C13D16EDD5EF00F7E779 /* SHA1.cpp */; };
 		38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */; };
+		38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */; };
+		38D8079B16FB0BDC00BE9CD8 /* AESCryptorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8079A16FB0BDC00BE9CD8 /* AESCryptorHelper.m */; };
+		38DB20D2170037DB006E08D3 /* Base64Coder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38DB20D0170037DB006E08D3 /* Base64Coder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -752,6 +755,14 @@
 		3893C13E16EDD5EF00F7E779 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
 		38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCInstantAuthSession.cpp; sourceTree = "<group>"; };
 		38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCInstantAuthSession.h; sourceTree = "<group>"; };
+		38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AESCryptor.cpp; sourceTree = "<group>"; };
+		38D8079416FB06E700BE9CD8 /* AESCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCryptor.h; sourceTree = "<group>"; };
+		38D8079816FB0BC300BE9CD8 /* AESCryptorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESCryptorHelper.h; sourceTree = "<group>"; };
+		38D8079A16FB0BDC00BE9CD8 /* AESCryptorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCryptorHelper.m; sourceTree = "<group>"; };
+		38DB20D0170037DB006E08D3 /* Base64Coder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64Coder.cpp; sourceTree = "<group>"; };
+		38DB20D1170037DB006E08D3 /* Base64Coder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Coder.h; sourceTree = "<group>"; };
+		655A3F191EC34FEA80C88CB7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D5D4FA243B4747B18E57F468 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -798,11 +809,13 @@
 				384FF37516E77C1A0066139A /* OpenGLES.framework */,
 				384FF37316E77C0B0066139A /* CoreGraphics.framework */,
 				3893C13C16EDD5EF00F7E779 /* sha */,
+				38D8079616FB0B9B00BE9CD8 /* aes */,
 				384FD8A116E602FB0066139A /* InstantAuth */,
 				384FD8B616E602FB0066139A /* InstantAuthTests */,
 				384FD90116E748530066139A /* cocos2d-x */,
 				384FD89E16E602FB0066139A /* Frameworks */,
 				384FD89D16E602FB0066139A /* Products */,
+				655A3F191EC34FEA80C88CB7 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -822,6 +835,7 @@
 				384FD89F16E602FB0066139A /* Foundation.framework */,
 				384FD8AE16E602FB0066139A /* SenTestingKit.framework */,
 				384FD8B016E602FB0066139A /* UIKit.framework */,
+				D5D4FA243B4747B18E57F468 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -833,10 +847,14 @@
 				38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */,
 				38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */,
 				384FD8D916E669C50066139A /* CCInstantAuthProtocol.h */,
+				38DB20D1170037DB006E08D3 /* Base64Coder.h */,
+				38DB20D0170037DB006E08D3 /* Base64Coder.cpp */,
 				384FD8EB16E7396C0066139A /* RapidJsonCoder.h */,
 				384FD8EA16E7396C0066139A /* RapidJsonCoder.cpp */,
 				384FF37116E77BC00066139A /* TimeHashVerifier.h */,
 				384FF37016E77BC00066139A /* TimeHashVerifier.cpp */,
+				38D8079416FB06E700BE9CD8 /* AESCryptor.h */,
+				38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */,
 				384FD8A216E602FB0066139A /* Supporting Files */,
 			);
 			path = InstantAuth;
@@ -1809,6 +1827,23 @@
 			path = sha;
 			sourceTree = "<group>";
 		};
+		38D8079616FB0B9B00BE9CD8 /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				38D8079816FB0BC300BE9CD8 /* AESCryptorHelper.h */,
+				38D8079716FB0B9B00BE9CD8 /* ios */,
+			);
+			path = aes;
+			sourceTree = "<group>";
+		};
+		38D8079716FB0B9B00BE9CD8 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				38D8079A16FB0BDC00BE9CD8 /* AESCryptorHelper.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1819,6 +1854,7 @@
 				384FD89816E602FB0066139A /* Sources */,
 				384FD89916E602FB0066139A /* Frameworks */,
 				384FD89A16E602FB0066139A /* CopyFiles */,
+				F66204CDE7634AB294E40100 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1918,6 +1954,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		F66204CDE7634AB294E40100 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1929,6 +1979,9 @@
 				384FF37216E77BC00066139A /* TimeHashVerifier.cpp in Sources */,
 				3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */,
 				38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */,
+				38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */,
+				38D8079B16FB0BDC00BE9CD8 /* AESCryptorHelper.m in Sources */,
+				38DB20D2170037DB006E08D3 /* Base64Coder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2225,11 +2278,21 @@
 		};
 		384FD8C216E602FB0066139A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 655A3F191EC34FEA80C88CB7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/InstantAuth.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+				);
+				LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -2237,11 +2300,21 @@
 		};
 		384FD8C316E602FB0066139A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 655A3F191EC34FEA80C88CB7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/InstantAuth.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+				);
+				LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -2257,6 +2330,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
 				INFOPLIST_FILE = "InstantAuthTests/InstantAuthTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "Pods/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2272,6 +2346,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
 				INFOPLIST_FILE = "InstantAuthTests/InstantAuthTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "Pods/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};

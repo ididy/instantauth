@@ -13,7 +13,6 @@ namespace cocos2d { namespace extension { namespace instantauth {
 
     CCData *TimeHashVerifier::encode_verification(CCString *private_key, CCString *public_key, CCString *secret_key) {
         time_t now = this->time_gen(NULL);
-        int hexhash_len = private_key->length() + public_key->length() + 8;
         CSHA1 hexhash;
         char timehex[9] = {0,};
         sprintf(timehex, "%8lx", now);
@@ -27,7 +26,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         for (int i = 0; i < 20; i++) {
             sprintf(hexhashhex + i * 2, "%02x", hexhashbin[i]);
         }
-        int verification_len = public_key->length() + 1 + 8 + hexhash_len;
+        int verification_len = public_key->length() + 1 + 8 + 40;
         char verification[verification_len + 1];
         sprintf(verification, "%s$%8lx%s", public_key->getCString(), now, hexhashhex);
         CCData *data = new CCData(new CCData((unsigned char *)verification, verification_len));
