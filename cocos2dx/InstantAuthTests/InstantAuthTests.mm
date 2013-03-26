@@ -9,12 +9,37 @@
 #import "InstantAuthTests.h"
 
 #import "CCInstantAuth.h"
+#import "CCInstantAuthSession.h"
 #import "AESCryptor.h"
 #import "TimeHashVerifier.h"
 #import "RapidJsonCoder.h"
 #import "Base64Coder.h"
 
+#include <rapidjson/document.h>
+
 #include <string.h>
+
+using namespace cocos2d::extension;
+using namespace cocos2d::extension::instantauth;
+
+class TestSession: public CCInstantAuthSession {
+public:
+    CCString *public_key;
+    CCString *private_key;
+};
+
+class TestSessionHandler: public SessionHandler {
+public:
+    virtual CCString *get_private_key(void *session) {
+        TestSession *sess = (TestSession *)session;
+        return sess->private_key;
+    }
+    virtual CCString *get_public_key(void *session) {
+        TestSession *sess = (TestSession *)session;
+        return sess->public_key;
+    }
+};
+
 
 @implementation InstantAuthTests
 
@@ -32,9 +57,6 @@
     [super tearDown];
 }
 
-using namespace cocos2d::extension;
-using namespace cocos2d::extension::instantauth;
-
 - (void)testCpp
 {
     const char text[] = "Hello, World";
@@ -48,57 +70,85 @@ using namespace cocos2d::extension::instantauth;
 
 - (void)testCreations
 {
-    PlainCryptor *plainCryptor = new PlainCryptor();
-    AESCryptor *aesCryptor = new AESCryptor();
+    Base64Coder base64Coder;
 
-    BypassVerifier *bypassVerifier = new BypassVerifier();
+    PlainCryptor plainCryptor;
+    AES256Cryptor aesCryptor;
 
-    PlainCoder *plainCoder = new PlainCoder();
-    RapidJsonCoder *rapidJsonCoder = new RapidJsonCoder();
-    RapidJsonDataKeyVerifier *rapidJsonDataKeyVerifier = new RapidJsonDataKeyVerifier(rapidJsonCoder, new CCString("key"));
+    BypassVerifier bypassVerifier;
 
-    TimeHashVerifier *timehashVerifier = new TimeHashVerifier();
+    PlainCoder plainCoder;
+
+    RapidJsonCoder rapidJsonCoder;
+    RapidJsonDataKeyVerifier *rapidJsonDataKeyVerifier = new RapidJsonDataKeyVerifier(&rapidJsonCoder, new CCString("key"));
+
+    TimeHashVerifier timehashVerifier;
 }
 
 - (void)testAESCryptor {
-    Base64Coder *base64 = new Base64Coder();
+    Coder *base64 = new Base64Coder();
 
     unsigned char *input = (unsigned char *)"test";
-    AESCryptor *cryptor = new AESCryptor();
+    Cryptor *cryptor = new AES256Cryptor();
     CCData *result = cryptor->encrypt(new CCData(input, 4), new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
-    STAssertEquals(strcmp(result_bytes, "ZmD83NYDIuGOHae0lEXHdg=="), 0, @"");
+    const char *expected = "ZmD83NYDIuGOHae0lEXHdg==";
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"");
 }
 
 - (void)testAESCryptorLong {
-    Base64Coder *base64 = new Base64Coder();
+    Coder *base64 = new Base64Coder();
 
     unsigned char *input = (unsigned char *)"How about this long sentence, saying over-a-block size.";
-    AESCryptor *cryptor = new AESCryptor();
+    Cryptor *cryptor = new AES256Cryptor();
     CCData *result = cryptor->encrypt(new CCData(input, strlen((const char *)input)), new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
-    STAssertEquals(strcmp(result_bytes, "qmAGce5jfKOjCH9ZjqoOpJiFXSJqSqK7QvmUe3SJfzFF0TnSJKCM5OdOQeKO3D3QYupvFTQy60maRIRM+KBcsQ=="), 0, @"");
+    const char *expected = "qmAGce5jfKOjCH9ZjqoOpJiFXSJqSqK7QvmUe3SJfzFF0TnSJKCM5OdOQeKO3D3QYupvFTQy60maRIRM+KBcsQ==";
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"");
 }
 
 - (void)testAESCryptorHangul {
-    Base64Coder *base64 = new Base64Coder();
+    Coder *base64 = new Base64Coder();
 
     unsigned char *input = (unsigned char *)"한글 AES 인크립션";
-    AESCryptor *cryptor = new AESCryptor();
+    Cryptor *cryptor = new AES256Cryptor();
     CCData *result = cryptor->encrypt(new CCData(input, strlen((const char*)input)), new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
-    STAssertEquals(strcmp(result_bytes, "zAWE34okwAICmI9gMzx/kO1g0obxJqfU0UtkO0r+MPQ="), 0, @"");
+    const char *expected = "zAWE34okwAICmI9gMzx/kO1g0obxJqfU0UtkO0r+MPQ=";
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"");
 }
 
+time_t ctime(time_t*) { return 1000000000; }
+
 - (void)testTimeHashVerifier {
-    TimeHashVerifier *timehashVerifier = new TimeHashVerifier();
+    TimeHashVerifier *timehashVerifier = new TimeHashVerifier(120, 300, &ctime);
     CCData *data = timehashVerifier->construct_data(new CCData((unsigned char *)"testdata", 8), new CCString("pvkey"), new CCString("pubkey"), new CCString("SECRET"));
     const char *output = (const char *)data->getBytes();
     const char *solution = "pubkey$3b9aca00f63f9ab09b4ea4b5e17e3fde03024c9d598e52ce$testdata";
-    strncmp(output, solution, strlen(solution));
+    STAssertEquals(strncmp(output, solution, strlen(solution)), 0, @"expected: %s / found: %s", solution, output);
+}
+
+- (void)testAESTimeHashJson {
+    Base64Coder base64coder;
+    AES256Cryptor aesCryptor;
+    TimeHashVerifier timehashVerifier;
+    RapidJsonCoder rapidJsonCoder;
+    TestSessionHandler handler;
+    CCString secret("SECRET");
+
+    CCInstantAuth auth(&base64coder, &aesCryptor, &timehashVerifier, &rapidJsonCoder, &handler, &secret);
+
+    rapidjson::Document doc;
+    rapidjson::Value value(rapidjson::kObjectType);
+    value.AddMember("field", "value", doc.GetAllocator());
+
+    CCData *data = auth.build_first_data(&value, new CCString("v"));
+
+    const char *expected = "";
+    STAssertEquals(strncmp(expected, (const char *)data->getBytes(), strlen(expected)), 0, @"");
 }
 
 @end

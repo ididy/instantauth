@@ -15,7 +15,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         time_t now = this->time_gen(NULL);
         CSHA1 hexhash;
         char timehex[9] = {0,};
-        sprintf(timehex, "%8lx", now);
+        sprintf(timehex, "%08lx", now);
         hexhash.Update((UINT_8 *)private_key->getCString(), private_key->length());
         hexhash.Update((UINT_8 *)public_key->getCString(), public_key->length());
         hexhash.Update((UINT_8 *)timehex, 8);
@@ -28,6 +28,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         }
         int verification_len = public_key->length() + 1 + 8 + 40;
         char verification[verification_len + 1];
+        bzero(verification, verification_len + 1);
         sprintf(verification, "%s$%8lx%s", public_key->getCString(), now, hexhashhex);
         CCData *data = new CCData(new CCData((unsigned char *)verification, verification_len));
         //data->autorelease();
@@ -38,7 +39,10 @@ namespace cocos2d { namespace extension { namespace instantauth {
         int bufferlen = verification->getSize() + 1 + data->getSize();
         char buffer[bufferlen + 1];
         buffer[bufferlen] = 0;
-        sprintf(buffer, "%s$%s", verification->getBytes(), data->getBytes());
+        int veriflen = verification->getSize();
+        memcpy(buffer, verification->getBytes(), veriflen);
+        buffer[veriflen] = '$';
+        memcpy(buffer + veriflen + 1, data->getBytes(), data->getSize());
         CCData *mdata = new CCData(new CCData((unsigned char *)buffer, bufferlen));
         //mdata->autorelease();
         return mdata;
