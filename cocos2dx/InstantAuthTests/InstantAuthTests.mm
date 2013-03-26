@@ -143,6 +143,27 @@ time_t ctime(time_t*) { return 1000000000; }
     STAssertEquals(strncmp(output, solution, strlen(solution)), 0, @"expected: %s / found: %s", solution, output);
 }
 
+- (void)testTimeHashJson {
+    PlainCoder streamcoder;
+    PlainCryptor cryptor;
+    TimeHashVerifier timehashVerifier(120, 300, &ctime);
+    RapidJsonCoder rapidJsonCoder;
+    TestSessionHandler handler;
+    CCString secret("SECRET");
+
+    CCInstantAuth auth(&streamcoder, &cryptor, &timehashVerifier, &rapidJsonCoder, &handler, &secret);
+
+    rapidjson::Document doc;
+    rapidjson::Value value(rapidjson::kObjectType);
+    value.AddMember("field", "value", doc.GetAllocator());
+
+    CCData *data = auth.build_first_data(&value, new CCString("v"));
+
+    const char *output = (const char *)data->getBytes();
+    const char *expected = "v$3b9aca008d34b0ce271d8d499ed4f44678db1175ae547b95${\"field\":\"value\"}";
+    STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
+}
+
 - (void)testAESTimeHashJson {
     Base64Coder base64coder;
     AES256Cryptor aesCryptor;
