@@ -20,7 +20,7 @@ def test_cryptor(cryptor, testcase, private_key='PRIVATE', secret='SECRET'):
     """Round-trip test"""
     b64coder = Base64Coder()
     for input, case in testcase.items():
-        encrypted = cryptor.encrypt_global(input, secret)
+        encrypted = cryptor.encrypt_stream(input, secret)
         expected = case.get('global', None)
         if expected is not None:
             assert(expected == encrypted or expected == b64coder.encode(encrypted))

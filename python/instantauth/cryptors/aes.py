@@ -35,7 +35,7 @@ class AESCryptor(BaseCryptor):
         self.key_size = bits / 8
         self.iv = cut_key(iv, self.BLOCK_SIZE)
 
-    def encrypt_global(self, stream, secret_key):
+    def encrypt_stream(self, stream, secret_key):
         secret_key = cut_key(secret_key, self.key_size)
         cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
         padded = add_padding(stream, self.BLOCK_SIZE)

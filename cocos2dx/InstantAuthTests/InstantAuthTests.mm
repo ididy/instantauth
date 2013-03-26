@@ -91,7 +91,7 @@ public:
     unsigned char *input = (unsigned char *)"test";
     Cryptor *cryptor = new AES256Cryptor();
     CCData *inputData = new CCData(input, strlen((const char*)input));
-    CCData *result = cryptor->encrypt(inputData, new CCString("SECRET"));
+    CCData *result = cryptor->encrypt_stream(inputData, new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
     const char *expected = "ZmD83NYDIuGOHae0lEXHdg==";
@@ -114,7 +114,7 @@ public:
 
     unsigned char *input = (unsigned char *)"How about this long sentence, saying over-a-block size.";
     Cryptor *cryptor = new AES256Cryptor();
-    CCData *result = cryptor->encrypt(new CCData(input, strlen((const char *)input)), new CCString("SECRET"));
+    CCData *result = cryptor->encrypt_stream(new CCData(input, strlen((const char *)input)), new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
     const char *expected = "qmAGce5jfKOjCH9ZjqoOpJiFXSJqSqK7QvmUe3SJfzFF0TnSJKCM5OdOQeKO3D3QYupvFTQy60maRIRM+KBcsQ==";
@@ -126,7 +126,7 @@ public:
 
     unsigned char *input = (unsigned char *)"한글 AES 인크립션";
     Cryptor *cryptor = new AES256Cryptor();
-    CCData *result = cryptor->encrypt(new CCData(input, strlen((const char*)input)), new CCString("SECRET"));
+    CCData *result = cryptor->encrypt_stream(new CCData(input, strlen((const char*)input)), new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
     const char *expected = "zAWE34okwAICmI9gMzx/kO1g0obxJqfU0UtkO0r+MPQ=";

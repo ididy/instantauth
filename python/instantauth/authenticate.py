@@ -112,7 +112,7 @@ class Authentication(object):
         coded_data = self.datacoder.encode(data) #2
         encrypted_data = self.cryptor.encrypt_first_data(coded_data, self.secret_key) #3
         merged_data = self.verifier.construct_first_data(encrypted_data, session_key, self.secret_key) #4
-        encrypted = self.cryptor.encrypt_global(merged_data, self.secret_key) #5
+        encrypted = self.cryptor.encrypt_stream(merged_data, self.secret_key) #5
         encoded_stream = self.streamcoder.encode(encrypted)
         return encoded_stream
 
@@ -135,7 +135,7 @@ class Authentication(object):
         encrypted_data = self.cryptor.encrypt_data(coded_data, private_key, self.secret_key) #3
         assert(encrypted_data is not None)
         merged_data = self.verifier.construct_data(encrypted_data, private_key, public_key, self.secret_key) #4
-        encrypted = self.cryptor.encrypt_global(merged_data, self.secret_key) #5
+        encrypted = self.cryptor.encrypt_stream(merged_data, self.secret_key) #5
         encoded_stream = self.streamcoder.encode(encrypted)
         return encoded_stream
 

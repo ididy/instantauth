@@ -2,7 +2,7 @@
 class BaseCryptor(object):
     derived_context = {}
 
-    def encrypt_global(self, stream, secret_key):
+    def encrypt_stream(self, stream, secret_key):
         raise NotImplementedError
 
     def decrypt_global(self, stream, secret_key):
@@ -21,7 +21,7 @@ class BaseCryptor(object):
         return self.encrypt_data(data, secret_key, secret_key)
 
 class PlainCryptor(BaseCryptor):
-    def encrypt_global(self, stream, secret_key):
+    def encrypt_stream(self, stream, secret_key):
         return stream
 
     def decrypt_global(self, stream, secret_key):

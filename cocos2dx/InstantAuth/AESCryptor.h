@@ -15,7 +15,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
 
     class AES256Cryptor: public Cryptor {
     public:
-        virtual CCData *encrypt(CCData *data, CCString *secret_key);
+        virtual CCData *encrypt_stream(CCData *data, CCString *secret_key);
         virtual CCData *encrypt_data(CCData *data, CCString *private_key, CCString *secret_key);
     };
 

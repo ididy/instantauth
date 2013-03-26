@@ -50,7 +50,7 @@ namespace cocos2d { namespace extension {
             CCString *public_key = this->session_handler->get_public_key(session);
 
             CCData *merged_data = this->verifier->construct_data(encrypted_data, private_key, public_key, secret_key);
-            CCData *encrypted = this->cryptor->encrypt(merged_data, this->secret_key);
+            CCData *encrypted = this->cryptor->encrypt_stream(merged_data, this->secret_key);
             
             return this->streamcoder->encode(encrypted);
         }
@@ -62,7 +62,7 @@ namespace cocos2d { namespace extension {
             assert(encrypted_data != NULL);
             
             CCData *merged_data = this->verifier->construct_first_data(encrypted_data, session_key, secret_key);
-            CCData *encrypted = this->cryptor->encrypt(merged_data, this->secret_key);
+            CCData *encrypted = this->cryptor->encrypt_stream(merged_data, this->secret_key);
             
             return this->streamcoder->encode(encrypted);
         }
