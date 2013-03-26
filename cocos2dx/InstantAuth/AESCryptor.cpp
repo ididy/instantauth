@@ -21,7 +21,7 @@ CCData *cap_iv(CCString *iv) {
     return new CCData(new CCData((unsigned char *)padded_iv, 16));
 }
 
-CCData *AESCryptor::encrypt(CCData *data, CCString *secret_key) {
+CCData *AES256Cryptor::encrypt(CCData *data, CCString *secret_key) {
     const long buffer_len = data->getSize() + 16;
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
@@ -33,7 +33,7 @@ CCData *AESCryptor::encrypt(CCData *data, CCString *secret_key) {
     return new CCData(buffer, size);
 }
 
-CCData *AESCryptor::encrypt_data(CCData *data, CCString *secret_key, CCString *private_key) {
+CCData *AES256Cryptor::encrypt_data(CCData *data, CCString *secret_key, CCString *private_key) {
     const long buffer_len = data->getSize() + 16;
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
