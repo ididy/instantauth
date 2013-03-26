@@ -27,10 +27,10 @@ class TimeHashVerifier(Verifier):
 
     def divide_verification_and_data(self, raw_data, secret_key):
         try:
-            vals = raw_data.rsplit('$', 1)
+            vals = raw_data.split('$', 2) # no rsplit - rightmost value can be bytes
         except ValueError:
             raise AuthenticationFormatCorrupted
-        return DividedData(vals[0], vals[1])
+        return DividedData(vals[0] + '$' + vals[1], vals[2])
 
     def public_key_from_verification(self, verification, secret_key):
         try:
