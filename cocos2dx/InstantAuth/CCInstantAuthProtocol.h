@@ -14,7 +14,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
     class Cryptor {
     public:
         virtual CCData *encrypt(CCData *data, CCString *secret_key) = 0;
-        virtual CCData *encrypt_data(CCData *data, CCString *secret_key, CCString *private_key) = 0;
+        virtual CCData *encrypt_data(CCData *data, CCString *private_key, CCString *secret_key) = 0;
         virtual CCData *encrypt_first_data(CCData *data, CCString *secret_key) {
             return this->encrypt_data(data, secret_key, secret_key);
         }
@@ -57,7 +57,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
 
     class PlainCryptor: public Cryptor {
     public:
-        virtual CCData *encrypt_data(CCData *data, CCString *secret_key, CCString *private_key) {
+        virtual CCData *encrypt_data(CCData *data, CCString *private_key, CCString *secret_key) {
             return data;
         }
         virtual CCData *encrypt(CCData *data, CCString *secret_key) {

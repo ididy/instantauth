@@ -90,11 +90,23 @@ public:
 
     unsigned char *input = (unsigned char *)"test";
     Cryptor *cryptor = new AES256Cryptor();
-    CCData *result = cryptor->encrypt(new CCData(input, 4), new CCString("SECRET"));
+    CCData *inputData = new CCData(input, strlen((const char*)input));
+    CCData *result = cryptor->encrypt(inputData, new CCString("SECRET"));
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
     const char *expected = "ZmD83NYDIuGOHae0lEXHdg==";
-    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"");
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"expected: %s / found: %s", expected, result_bytes);
+
+    result = cryptor->encrypt_data(inputData, new CCString(""), new CCString("SECRET"));
+    result = base64->encode((void *)result);
+    result_bytes = (const char *)result->getBytes();
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"expected: %s / found: %s", expected, result_bytes);
+
+    result = cryptor->encrypt_data(inputData, new CCString("PRIVATE"), new CCString("SECRET"));
+    result = base64->encode((void *)result);
+    result_bytes = (const char *)result->getBytes();
+    expected = "8QFEX+ESikvs2vvzfe09jw==";
+    STAssertEquals(strncmp(expected, result_bytes, strlen(expected)), 0, @"expected: %s / found: %s", expected, result_bytes);
 }
 
 - (void)testAESCryptorLong {
@@ -134,7 +146,7 @@ time_t ctime(time_t*) { return 1000000000; }
 - (void)testAESTimeHashJson {
     Base64Coder base64coder;
     AES256Cryptor aesCryptor;
-    TimeHashVerifier timehashVerifier;
+    TimeHashVerifier timehashVerifier(120, 300, &ctime);
     RapidJsonCoder rapidJsonCoder;
     TestSessionHandler handler;
     CCString secret("SECRET");
@@ -147,8 +159,9 @@ time_t ctime(time_t*) { return 1000000000; }
 
     CCData *data = auth.build_first_data(&value, new CCString("v"));
 
-    const char *expected = "";
-    STAssertEquals(strncmp(expected, (const char *)data->getBytes(), strlen(expected)), 0, @"");
+    const char *output = (const char *)data->getBytes();
+    const char *expected = "wJ8UaQ0+pQm3V9Rpj+ZnmS9K9vFi9G5Lrr5Mv7oS/PvgxZSSKmu02Had5Z4CQ5AgpMR3qJ6GFshPRAjIB5v/B3eP6ILSDlyjrcgA51wlzzrVEi5uAQPHB9X742xD11lR";
+    STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
 }
 
 @end

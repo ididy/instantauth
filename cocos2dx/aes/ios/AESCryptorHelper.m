@@ -13,7 +13,7 @@
 
 extern NSData *NSDataCommonCryptoCrypt(CCOperation operation, NSData *data, NSData *key, CCAlgorithm algorithm, CCOptions options, size_t keyLength, size_t blockSize);
 
-long encrypt_aes256(const unsigned char *src, const long len, const char *secret_key, const unsigned long secret_key_len, const char *ivec, unsigned char *dest) {
+long encrypt_aes256(const unsigned char *src, const long len, const char *secret_key, const unsigned long secret_key_len, const unsigned char *ivec, unsigned char *dest) {
     NSData *input = [NSData dataWithBytesNoCopy:(void *)src length:len freeWhenDone:NO];
     NSData *key = [NSData dataWithBytesNoCopy:(void *)secret_key length:secret_key_len freeWhenDone:NO];
 //    NSData *output = NSDataCommonCryptoCrypt(kCCEncrypt, input, key, kCCAlgorithmAES128, kCCOptionPKCS7Padding, kCCKeySizeAES256, kCCBlockSizeAES128);

@@ -33,11 +33,12 @@ CCData *AES256Cryptor::encrypt(CCData *data, CCString *secret_key) {
     return new CCData(buffer, size);
 }
 
-CCData *AES256Cryptor::encrypt_data(CCData *data, CCString *secret_key, CCString *private_key) {
+CCData *AES256Cryptor::encrypt_data(CCData *data, CCString *private_key, CCString *secret_key) {
     const long buffer_len = data->getSize() + 16;
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
-    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), private_key->getCString(), private_key->length(), (char *)cap_iv(private_key)->getBytes(), buffer);
+    CCData *iv = cap_iv(private_key);
+    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), secret_key->getCString(), secret_key->length(), iv->getBytes(), buffer);
     if (size < 0) {
         free(buffer);
         return 0;

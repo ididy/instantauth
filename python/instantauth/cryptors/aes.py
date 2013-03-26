@@ -20,20 +20,20 @@ def strip_padding(data):
     pad_len = ord(padding)
     return data[:-pad_len]
 
-def cut_key(key, block_size):
-    while len(key) < block_size: # ...
-        key += chr(0) * block_size
-    return key[:block_size]
+def cut_key(key, key_size):
+    while len(key) < key_size: # ...
+        key += chr(0) * key_size
+    return key[:key_size]
 
 
 class AESCryptor(BaseCryptor):
     BLOCK_SIZE = 16
 
-    def __init__(self, bits=128, iv=chr(0) * 16): # iv is useless for temporary data in usual case
+    def __init__(self, bits=128, iv=''): # iv is useless for temporary data in usual case
         if not bits in (128, 192, 256):
             raise ValueError(bits) # make one
         self.key_size = bits / 8
-        self.iv = iv
+        self.iv = cut_key(iv, self.BLOCK_SIZE)
 
     def encrypt_global(self, stream, secret_key):
         secret_key = cut_key(secret_key, self.key_size)
@@ -49,14 +49,18 @@ class AESCryptor(BaseCryptor):
         return strip_padding(decrypted)
 
     def encrypt_data(self, data, private_key, secret_key):
-        secret_key = cut_key(private_key, self.key_size)
-        cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
+        secret_key = cut_key(secret_key, self.key_size)
+        iv = cut_key(private_key, self.BLOCK_SIZE)
+        print 'data:', data, ' / sec:', secret_key, ' / pv:', iv
+        cipher = AES.new(secret_key, AES.MODE_CBC, iv)
         padded = add_padding(data, self.BLOCK_SIZE)
         encrypted = cipher.encrypt(padded)
         return encrypted
 
     def decrypt_data(self, data, private_key, secret_key):
-        secret_key = cut_key(private_key, self.key_size)
-        cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
+        secret_key = cut_key(secret_key, self.key_size)
+        iv = cut_key(private_key, self.BLOCK_SIZE)
+        cipher = AES.new(secret_key, AES.MODE_CBC, iv)
         decrypted = cipher.decrypt(data)
         return strip_padding(decrypted)
+
