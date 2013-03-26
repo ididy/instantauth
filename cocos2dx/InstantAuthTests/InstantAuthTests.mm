@@ -162,6 +162,15 @@ time_t ctime(time_t*) { return 1000000000; }
     const char *output = (const char *)data->getBytes();
     const char *expected = "v$3b9aca008d34b0ce271d8d499ed4f44678db1175ae547b95${\"field\":\"value\"}";
     STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
+
+    TestSession *session = new TestSession();
+    session->public_key = new CCString("v");
+    session->private_key = new CCString("pv");
+    data = auth.build_data(&value, session);
+
+    output = (const char *)data->getBytes();
+    expected = "v$3b9aca00741e96c093a4a5c230d3ea592adcabf3e055df4a${\"field\":\"value\"}";
+    STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
 }
 
 - (void)testAESTimeHashJson {
@@ -182,6 +191,15 @@ time_t ctime(time_t*) { return 1000000000; }
 
     const char *output = (const char *)data->getBytes();
     const char *expected = "wJ8UaQ0+pQm3V9Rpj+ZnmS9K9vFi9G5Lrr5Mv7oS/PvgxZSSKmu02Had5Z4CQ5AgpMR3qJ6GFshPRAjIB5v/B3eP6ILSDlyjrcgA51wlzzrVEi5uAQPHB9X742xD11lR";
+    STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
+
+    TestSession *session = new TestSession();
+    session->public_key = new CCString("v");
+    session->private_key = new CCString("pv");
+    data = auth.build_data(&value, session);
+
+    output = (const char *)data->getBytes();
+    expected = "sTZkvpTfADtge51D9Mwprs8zSzmHAx8PDk/VoX6+pI+Gb47o393wxShTdlJV4oT26XE6sBwcNXPzWkR+I9wuiD/9lBUKo8LLiZbNBiCvWhYTpeIN45aZDUXWVDijMFMH";
     STAssertEquals(strncmp(expected, output, strlen(expected)), 0, @"expected: %s / found: %s", expected, output);
 }
 

@@ -44,12 +44,12 @@ namespace cocos2d { namespace extension {
 
             CCData *coded_data = this->datacoder->encode(data);
             assert(coded_data != NULL);
-            CCData *encrypted_data = this->cryptor->encrypt_data(coded_data, this->secret_key, private_key);
+            CCData *encrypted_data = this->cryptor->encrypt_data(coded_data, private_key, this->secret_key);
             assert(encrypted_data != NULL);
 
             CCString *public_key = this->session_handler->get_public_key(session);
 
-            CCData *merged_data = this->verifier->construct_data(encrypted_data, private_key, public_key, secret_key);
+            CCData *merged_data = this->verifier->construct_data(encrypted_data, private_key, public_key, this->secret_key);
             CCData *encrypted = this->cryptor->encrypt_stream(merged_data, this->secret_key);
             
             return this->streamcoder->encode(encrypted);
