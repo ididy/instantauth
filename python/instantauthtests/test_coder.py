@@ -15,7 +15,7 @@ json = JsonCoder()
     (constant, [('decode', 'encode')]),
     (plain, [('foo', 'foo')]),
     (surlquery, [({'f1': 'v1', 'f2': 'v2'}, 'f1=v1&f2=v2')]),
-    (json, [({'f1': 'v1', 'i': 1}, json_mod.dumps({'f1': 'v1', 'i': 1}))]),
+    (json, [({'f1': 'v1', 'i': 1}, json_mod.dumps({'f1': 'v1', 'i': 1}, separators=(',',':')))]),
 ])
 def test_coder(coder, testcase, secret='SECRET'):
     """Round-trip test"""

@@ -53,7 +53,18 @@ def test_authentication(cryptor, verifier, coder, sessionhandler, secret='SECRET
     
     assert i == c.data
 
-def test_aes_timehash_json():
+def test_timehash_json():
+    data = {'field':'value'}
+    auth = Authentication(PlainCoder(), PlainCryptor(), TimeHashVerifier(now=lambda: 1000000000), JsonCoder(), handler1, 'SECRET')
+
+    d = auth.build_first_data(data, 'v')
+    print d
+    assert d == 'v$3b9aca008d34b0ce271d8d499ed4f44678db1175ae547b95${"field":"value"}'
+    
+    c = auth.get_first_context(d)
+    assert data == c.data
+
+def test_base64_aes_timehash_json():
     data = {'field': 'value'}
     auth = Authentication(Base64Coder(), AESCryptor(256), TimeHashVerifier(now=lambda: 1000000000), JsonCoder(), handler1, 'SECRET')
 
