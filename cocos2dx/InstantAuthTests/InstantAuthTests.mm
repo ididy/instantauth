@@ -14,6 +14,8 @@
 #import "RapidJsonCoder.h"
 #import "Base64Coder.h"
 
+#include <string.h>
+
 @implementation InstantAuthTests
 
 - (void)setUp
@@ -67,6 +69,28 @@ using namespace cocos2d::extension::instantauth;
     result = base64->encode((void *)result);
     const char *result_bytes = (const char *)result->getBytes();
     STAssertEquals(strcmp(result_bytes, "ZmD83NYDIuGOHae0lEXHdg=="), 0, @"");
+}
+
+- (void)testAESCryptorLong {
+    Base64Coder *base64 = new Base64Coder();
+
+    unsigned char *input = (unsigned char *)"How about this long sentence, saying over-a-block size.";
+    AESCryptor *cryptor = new AESCryptor();
+    CCData *result = cryptor->encrypt(new CCData(input, strlen((const char *)input)), new CCString("SECRET"));
+    result = base64->encode((void *)result);
+    const char *result_bytes = (const char *)result->getBytes();
+    STAssertEquals(strcmp(result_bytes, "qmAGce5jfKOjCH9ZjqoOpJiFXSJqSqK7QvmUe3SJfzFF0TnSJKCM5OdOQeKO3D3QYupvFTQy60maRIRM+KBcsQ=="), 0, @"");
+}
+
+- (void)testAESCryptorHangul {
+    Base64Coder *base64 = new Base64Coder();
+
+    unsigned char *input = (unsigned char *)"한글 AES 인크립션";
+    AESCryptor *cryptor = new AESCryptor();
+    CCData *result = cryptor->encrypt(new CCData(input, strlen((const char*)input)), new CCString("SECRET"));
+    result = base64->encode((void *)result);
+    const char *result_bytes = (const char *)result->getBytes();
+    STAssertEquals(strcmp(result_bytes, "zAWE34okwAICmI9gMzx/kO1g0obxJqfU0UtkO0r+MPQ="), 0, @"");
 }
 
 - (void)testTimeHashVerifier {

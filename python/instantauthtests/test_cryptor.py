@@ -1,4 +1,5 @@
 
+# -*- coding: utf-8 -*-
 import pytest
 
 from instantauth.cryptors import PlainCryptor
@@ -12,6 +13,8 @@ aes = AESCryptor(256)
 @pytest.mark.parametrize(('cryptor', 'testcase'), [
     (plain, {'test': {'global': 'test', 'data': 'test'}}),
     (aes, {'test': {'global': 'ZmD83NYDIuGOHae0lEXHdg=='}}),
+    (aes, {'How about this long sentence, saying over-a-block size.': {'global': 'qmAGce5jfKOjCH9ZjqoOpJiFXSJqSqK7QvmUe3SJfzFF0TnSJKCM5OdOQeKO3D3QYupvFTQy60maRIRM+KBcsQ=='}}),
+    (aes, {'한글 AES 인크립션': {'global': 'zAWE34okwAICmI9gMzx/kO1g0obxJqfU0UtkO0r+MPQ='}}),
 ])
 def test_cryptor(cryptor, testcase, private_key='PRIVATE', secret='SECRET'):
     """Round-trip test"""
