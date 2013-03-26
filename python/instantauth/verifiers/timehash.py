@@ -60,5 +60,5 @@ class TimeHashVerifier(Verifier):
         inow = int(now)
         hextime = '%8x' % inow
         hexhash = timehash(private_key, public_key, hextime)
-        return ''.join((public_key, '$', hextime, hexhash))
+        return str(''.join((public_key, '$', hextime, hexhash)))
 
