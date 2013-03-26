@@ -51,7 +51,6 @@ class AESCryptor(BaseCryptor):
     def encrypt_data(self, data, private_key, secret_key):
         secret_key = cut_key(secret_key, self.key_size)
         iv = cut_key(private_key, self.BLOCK_SIZE)
-        print 'data:', data, ' / sec:', secret_key, ' / pv:', iv
         cipher = AES.new(secret_key, AES.MODE_CBC, iv)
         padded = add_padding(data, self.BLOCK_SIZE)
         encrypted = cipher.encrypt(padded)

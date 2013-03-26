@@ -58,19 +58,27 @@ def test_timehash_json():
     auth = Authentication(PlainCoder(), PlainCryptor(), TimeHashVerifier(now=lambda: 1000000000), JsonCoder(), handler1, 'SECRET')
 
     d = auth.build_first_data(data, 'v')
-    print d
     assert d == 'v$3b9aca008d34b0ce271d8d499ed4f44678db1175ae547b95${"field":"value"}'
     
     c = auth.get_first_context(d)
     assert data == c.data
+
+    d = auth.build_data(data, handler1.session_from_public_key('v'))
+    assert d == 'v$3b9aca00741e96c093a4a5c230d3ea592adcabf3e055df4a${"field":"value"}'
+    c = auth.get_context(d)
+    assert data == c.data 
 
 def test_base64_aes_timehash_json():
     data = {'field': 'value'}
     auth = Authentication(Base64Coder(), AESCryptor(256), TimeHashVerifier(now=lambda: 1000000000), JsonCoder(), handler1, 'SECRET')
 
     d = auth.build_first_data(data, 'v')
-    print d
     assert d == 'wJ8UaQ0+pQm3V9Rpj+ZnmS9K9vFi9G5Lrr5Mv7oS/PvgxZSSKmu02Had5Z4CQ5AgpMR3qJ6GFshPRAjIB5v/B3eP6ILSDlyjrcgA51wlzzrVEi5uAQPHB9X742xD11lR'
     
     c = auth.get_first_context(d)
     assert data == c.data
+
+    d = auth.build_data(data, handler1.session_from_public_key('v'))
+    assert d == 'sTZkvpTfADtge51D9Mwprs8zSzmHAx8PDk/VoX6+pI+Gb47o393wxShTdlJV4oT26XE6sBwcNXPzWkR+I9wuiD/9lBUKo8LLiZbNBiCvWhYTpeIN45aZDUXWVDijMFMH'
+    c = auth.get_context(d)
+    assert data == c.data 
