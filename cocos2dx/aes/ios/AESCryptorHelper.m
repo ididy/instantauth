@@ -8,7 +8,7 @@
 
 #include "AESCryptorHelper.h"
 
-#import <FoundationExtension/FoundationExtension.h>
+#import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonCrypto.h>
 
 extern NSData *NSDataCommonCryptoCrypt(CCOperation operation, NSData *data, NSData *key, CCAlgorithm algorithm, CCOptions options, size_t keyLength, size_t blockSize);

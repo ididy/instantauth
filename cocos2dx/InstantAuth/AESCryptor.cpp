@@ -38,7 +38,7 @@ CCData *AES256Cryptor::encrypt_data(CCData *data, CCString *private_key, CCStrin
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
     CCData *iv = cap_iv(private_key);
-    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), secret_key->getCString(), secret_key->length(), iv->getBytes(), buffer);
+    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), secret_key->getCString(), secret_key->length(), (const unsigned char *)iv->getBytes(), buffer);
     if (size < 0) {
         free(buffer);
         return 0;
