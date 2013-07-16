@@ -18,7 +18,7 @@ namespace cocos2d { namespace extension {
         return request;
     }
 
-    CCHttpRequest *CCInstantAuthSession::_auth_request(std::string& url, void *data, cocos2d::CCString *session_key, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector) {
+    CCHttpRequest *CCInstantAuthSession::_auth_request(std::string& url, void *data, cocos2d::CCString *session_key, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector) {
         CCData *ccdata = this->auth()->build_first_data(data, session_key);
         std::string sdata((const char *)ccdata->getBytes(), (const char *)ccdata->getBytes() + ccdata->getSize());
 
@@ -28,7 +28,7 @@ namespace cocos2d { namespace extension {
         return request;
     }
 
-    CCHttpRequest *CCInstantAuthSession::_reauth_request(void *data, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector) {
+    CCHttpRequest *CCInstantAuthSession::_reauth_request(void *data, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector) {
         CCData *ccdata = this->auth()->build_first_data(data, new CCString(this->_session_key.c_str()));
         std::string sdata((const char *)ccdata->getBytes(), (const char *)ccdata->getBytes() + ccdata->getSize());
 
@@ -38,7 +38,7 @@ namespace cocos2d { namespace extension {
         return request;
     }
 
-    CCHttpRequest *CCInstantAuthSession::_request(std::string& url, void *data, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector) {
+    CCHttpRequest *CCInstantAuthSession::_request(std::string& url, void *data, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector) {
         CCData *ccdata = this->auth()->build_data(data, this);
         std::string sdata((const char *)ccdata->getBytes(), (const char *)ccdata->getBytes() + ccdata->getSize());
 

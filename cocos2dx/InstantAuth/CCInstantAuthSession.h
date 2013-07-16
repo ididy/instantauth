@@ -20,9 +20,9 @@ namespace cocos2d { namespace extension {
         std::string _session_id;
         std::string _private_key;
 
-        CCHttpRequest *_auth_request(std::string& url, void *data, cocos2d::CCString *session_key, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector);
-        CCHttpRequest *_reauth_request(void *data, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector);
-        CCHttpRequest *_request(std::string& url, void *data, cocos2d::CCObject *pTarget, SEL_CallFuncND pSelector);
+        CCHttpRequest *_auth_request(std::string& url, void *data, cocos2d::CCString *session_key, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector);
+        CCHttpRequest *_reauth_request(void *data, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector);
+        CCHttpRequest *_request(std::string& url, void *data, cocos2d::CCObject *pTarget, SEL_HttpResponse pSelector);
 
     public:
         // Create constructor

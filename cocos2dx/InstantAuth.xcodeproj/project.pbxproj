@@ -207,7 +207,13 @@
 		384FF38416E77D7D0066139A /* unzip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF38016E77D7D0066139A /* unzip.cpp */; };
 		384FF38716E77DD60066139A /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384FD8F516E747E50066139A /* libcocos2dx.a */; };
 		384FF38816E77E220066139A /* CCFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FDA3C16E748540066139A /* CCFileUtils.cpp */; };
-		384FF38B16E77E520066139A /* ioapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF37E16E77D7D0066139A /* ioapi.cpp */; };
+		3860C3FB17953D0A00E84019 /* CCTextureETC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3860C3F917953D0A00E84019 /* CCTextureETC.cpp */; };
+		3860C3FE17953D8400E84019 /* CCDataVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3860C3FC17953D8400E84019 /* CCDataVisitor.cpp */; };
+		3860C40017953DBF00E84019 /* CCUserDefault.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3860C3FF17953DBF00E84019 /* CCUserDefault.mm */; };
+		3860C40617953E5A00E84019 /* CCComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3860C40217953E5A00E84019 /* CCComponent.cpp */; };
+		3860C40717953E5A00E84019 /* CCComponentContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3860C40417953E5A00E84019 /* CCComponentContainer.cpp */; };
+		3860C40817953E8200E84019 /* ioapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384FF37E16E77D7D0066139A /* ioapi.cpp */; };
+		3860C40A17953EAF00E84019 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860C40917953EAF00E84019 /* QuartzCore.framework */; };
 		3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3893C13D16EDD5EF00F7E779 /* SHA1.cpp */; };
 		38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */; };
 		38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */; };
@@ -578,8 +584,8 @@
 		384FE07E16E7485A0066139A /* CCPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPointExtension.h; sourceTree = "<group>"; };
 		384FE07F16E7485A0066139A /* CCProfiling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProfiling.cpp; sourceTree = "<group>"; };
 		384FE08016E7485A0066139A /* CCProfiling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProfiling.h; sourceTree = "<group>"; };
-		384FE08116E7485A0066139A /* CCUserDefault.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCUserDefault.cpp; sourceTree = "<group>"; };
-		384FE08216E7485A0066139A /* CCUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserDefault.h; sourceTree = "<group>"; };
+		384FE08116E7485A0066139A /* CCUserDefault.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCUserDefault.cpp; path = user_default/CCUserDefault.cpp; sourceTree = "<group>"; };
+		384FE08216E7485A0066139A /* CCUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCUserDefault.h; path = user_default/CCUserDefault.h; sourceTree = "<group>"; };
 		384FE08316E7485A0066139A /* CCVertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCVertex.cpp; sourceTree = "<group>"; };
 		384FE08416E7485A0066139A /* CCVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVertex.h; sourceTree = "<group>"; };
 		384FE08516E7485A0066139A /* TransformUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformUtils.cpp; sourceTree = "<group>"; };
@@ -751,6 +757,16 @@
 		384FF37F16E77D7D0066139A /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
 		384FF38016E77D7D0066139A /* unzip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unzip.cpp; sourceTree = "<group>"; };
 		384FF38116E77D7D0066139A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		3860C3F917953D0A00E84019 /* CCTextureETC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTextureETC.cpp; sourceTree = "<group>"; };
+		3860C3FA17953D0A00E84019 /* CCTextureETC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureETC.h; sourceTree = "<group>"; };
+		3860C3FC17953D8400E84019 /* CCDataVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCDataVisitor.cpp; sourceTree = "<group>"; };
+		3860C3FD17953D8400E84019 /* CCDataVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDataVisitor.h; sourceTree = "<group>"; };
+		3860C3FF17953DBF00E84019 /* CCUserDefault.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCUserDefault.mm; path = user_default/CCUserDefault.mm; sourceTree = "<group>"; };
+		3860C40217953E5A00E84019 /* CCComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponent.cpp; sourceTree = "<group>"; };
+		3860C40317953E5A00E84019 /* CCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComponent.h; sourceTree = "<group>"; };
+		3860C40417953E5A00E84019 /* CCComponentContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponentContainer.cpp; sourceTree = "<group>"; };
+		3860C40517953E5A00E84019 /* CCComponentContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComponentContainer.h; sourceTree = "<group>"; };
+		3860C40917953EAF00E84019 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3893C13D16EDD5EF00F7E779 /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
 		3893C13E16EDD5EF00F7E779 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
 		38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCInstantAuthSession.cpp; sourceTree = "<group>"; };
@@ -778,6 +794,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3860C40A17953EAF00E84019 /* QuartzCore.framework in Frameworks */,
 				384FF38716E77DD60066139A /* libcocos2dx.a in Frameworks */,
 				384FF37816E77C280066139A /* libz.dylib in Frameworks */,
 				384FF37616E77C1B0066139A /* OpenGLES.framework in Frameworks */,
@@ -805,6 +822,7 @@
 		384FD89316E602FB0066139A = {
 			isa = PBXGroup;
 			children = (
+				3860C40917953EAF00E84019 /* QuartzCore.framework */,
 				384FF37716E77C270066139A /* libz.dylib */,
 				384FF37516E77C1A0066139A /* OpenGLES.framework */,
 				384FF37316E77C0B0066139A /* CoreGraphics.framework */,
@@ -1048,6 +1066,8 @@
 				384FD9BC16E748530066139A /* CCAutoreleasePool.cpp */,
 				384FD9BD16E748530066139A /* CCAutoreleasePool.h */,
 				384FD9BE16E748530066139A /* CCBool.h */,
+				3860C3FC17953D8400E84019 /* CCDataVisitor.cpp */,
+				3860C3FD17953D8400E84019 /* CCDataVisitor.h */,
 				384FD9BF16E748530066139A /* CCDictionary.cpp */,
 				384FD9C016E748530066139A /* CCDictionary.h */,
 				384FD9C116E748530066139A /* CCDouble.h */,
@@ -1517,6 +1537,7 @@
 				384FE08016E7485A0066139A /* CCProfiling.h */,
 				384FE08116E7485A0066139A /* CCUserDefault.cpp */,
 				384FE08216E7485A0066139A /* CCUserDefault.h */,
+				3860C3FF17953DBF00E84019 /* CCUserDefault.mm */,
 				384FE08316E7485A0066139A /* CCVertex.cpp */,
 				384FE08416E7485A0066139A /* CCVertex.h */,
 				384FE08516E7485A0066139A /* TransformUtils.cpp */,
@@ -1527,6 +1548,7 @@
 				384FE08A16E7485A0066139A /* ccUTF8.h */,
 				384FE08B16E7485A0066139A /* ccUtils.cpp */,
 				384FE08C16E7485A0066139A /* ccUtils.h */,
+				3860C40117953E5A00E84019 /* component */,
 				384FE08D16E7485A0066139A /* data_support */,
 				384FE09216E7485A0066139A /* image_support */,
 				384FE09516E7485A0066139A /* tinyxml2 */,
@@ -1587,6 +1609,8 @@
 				384FE0AB16E7485A0066139A /* CCTextureCache.h */,
 				384FE0AC16E7485A0066139A /* CCTexturePVR.cpp */,
 				384FE0AD16E7485A0066139A /* CCTexturePVR.h */,
+				3860C3F917953D0A00E84019 /* CCTextureETC.cpp */,
+				3860C3FA17953D0A00E84019 /* CCTextureETC.h */,
 			);
 			path = textures;
 			sourceTree = "<group>";
@@ -1818,6 +1842,17 @@
 			path = zip_support;
 			sourceTree = "<group>";
 		};
+		3860C40117953E5A00E84019 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				3860C40217953E5A00E84019 /* CCComponent.cpp */,
+				3860C40317953E5A00E84019 /* CCComponent.h */,
+				3860C40417953E5A00E84019 /* CCComponentContainer.cpp */,
+				3860C40517953E5A00E84019 /* CCComponentContainer.h */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
 		3893C13C16EDD5EF00F7E779 /* sha */ = {
 			isa = PBXGroup;
 			children = (
@@ -1966,7 +2001,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "#\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2180,7 +2215,12 @@
 				384FF38216E77D7D0066139A /* ZipUtils.cpp in Sources */,
 				384FF38416E77D7D0066139A /* unzip.cpp in Sources */,
 				384FF38816E77E220066139A /* CCFileUtils.cpp in Sources */,
-				384FF38B16E77E520066139A /* ioapi.cpp in Sources */,
+				3860C3FB17953D0A00E84019 /* CCTextureETC.cpp in Sources */,
+				3860C3FE17953D8400E84019 /* CCDataVisitor.cpp in Sources */,
+				3860C40017953DBF00E84019 /* CCUserDefault.mm in Sources */,
+				3860C40617953E5A00E84019 /* CCComponent.cpp in Sources */,
+				3860C40717953E5A00E84019 /* CCComponentContainer.cpp in Sources */,
+				3860C40817953E8200E84019 /* ioapi.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2356,9 +2396,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/cocos2dx.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					CC_TARGET_OS_IPHONE,
 					"DEBUG=1",
-					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					"fseeko64=fseeko",
+					"fopen64=fopen",
+					CC_ENABLE_CHIPMUNK_INTEGRATION,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2382,6 +2428,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/cocos2dx.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					"fseeko64=fseeko",
+					"fopen64=fopen",
+					CC_ENABLE_CHIPMUNK_INTEGRATION,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"cocos2d-x/cocos2dx/platform/third_party/ios",
