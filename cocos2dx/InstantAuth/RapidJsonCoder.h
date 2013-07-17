@@ -16,12 +16,14 @@ namespace cocos2d { namespace extension { namespace instantauth {
     class RapidJsonCoder: public Coder {
     public:
         virtual CCData *encode(void *data);
+        virtual void *decode(CCData *data);
     };
 
     class RapidJsonDataKeyVerifier: public DataKeyVerifier {
     public:
         RapidJsonDataKeyVerifier(Coder *coder, CCString *key) : DataKeyVerifier(coder, key) { }
         virtual CCData *construct_data(CCData *raw_data, CCString *private_key, CCString *public_key, CCString *secret_key);
+        virtual VerifierDestructedData destruct_data(CCData *raw_data, CCString *secret_key);
     };
 
 } } }

@@ -5,7 +5,7 @@ class BaseCryptor(object):
     def encrypt_stream(self, stream, secret_key):
         raise NotImplementedError
 
-    def decrypt_global(self, stream, secret_key):
+    def decrypt_stream(self, stream, secret_key):
         raise NotImplementedError
 
     def encrypt_data(self, data, private_key, secret_key):
@@ -24,7 +24,7 @@ class PlainCryptor(BaseCryptor):
     def encrypt_stream(self, stream, secret_key):
         return stream
 
-    def decrypt_global(self, stream, secret_key):
+    def decrypt_stream(self, stream, secret_key):
         return stream
 
     def encrypt_data(self, data, private_key, secret_key):

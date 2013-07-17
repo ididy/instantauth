@@ -26,6 +26,10 @@ namespace cocos2d { namespace extension { namespace instantauth {
         }
         virtual CCData *encode_verification(CCString *private_key, CCString *public_key, CCString *secret_key);
         virtual CCData *merge_verification_data(CCData *verification, CCData *data, CCString *secret_key);
+        
+        virtual VerifierDestructedData divide_verification_and_data(CCData *raw_data, CCString *secret_key);
+        virtual CCString *public_key_from_verification(CCString *verification, CCString *secret_key);
+        virtual bool verify(VerifierDestructedData destructed, CCString *private_key, CCString *secret_key);
     };
 
 } } }

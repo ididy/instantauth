@@ -16,6 +16,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
     class Base64Coder: public Coder {
     public:
         virtual CCData *encode(void *data);
+        virtual void *decode(CCData *data);
     };
     
 } } }

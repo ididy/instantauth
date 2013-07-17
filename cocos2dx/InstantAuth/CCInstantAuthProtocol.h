@@ -9,7 +9,10 @@
 #ifndef __InstantAuth__CCAuthentication__
 #define __InstantAuth__CCAuthentication__
 
-namespace cocos2d { namespace extension { namespace instantauth {
+namespace cocos2d { namespace extension {
+
+class CCInstantAuthSession;
+namespace instantauth {
 
     class Cryptor {
     public:
@@ -19,13 +22,30 @@ namespace cocos2d { namespace extension { namespace instantauth {
             return this->encrypt_data(data, secret_key, secret_key);
         }
 
-        /*
-        virtual CCData *decrypt(CCData *data, CCString *secret_key) = 0;
-        virtual CCData *decrypt_data(CCData *data, CCString *secret_key, CCString *private_key) = 0;
+        virtual CCData *decrypt_stream(CCData *data, CCString *secret_key) = 0;
+        virtual CCData *decrypt_data(CCData *data, CCString *private_key, CCString *secret_key) = 0;
         virtual CCData *decrypt_first_data(CCData *data, CCString *secret_key) {
             return this->decrypt_data(data, secret_key, secret_key);
         }
-        */
+    };
+
+    class VerifierDestructedData {
+    public:
+        CCString *public_key;
+        CCString *verification;
+        CCData *data;
+
+        VerifierDestructedData(CCString *public_key, CCString *verification, CCData *data) {
+            this->public_key = public_key;
+            this->verification = verification;
+            this->data = data;
+        }
+        
+        void destruct() { // allow easy copying
+            this->public_key->release();
+            this->verification->release();
+            this->data->release();
+        }
     };
 
     class Verifier {
@@ -40,17 +60,31 @@ namespace cocos2d { namespace extension { namespace instantauth {
         virtual CCData *construct_first_data(CCData *raw_data, CCString *session_key, CCString *secret_key) {
             return this->construct_data(raw_data, secret_key, session_key, secret_key);
         }
+
+        virtual VerifierDestructedData divide_verification_and_data(CCData *raw_data, CCString *secret_key) = 0;
+        virtual CCString *public_key_from_verification(CCString *verification, CCString *secret_key) = 0;
+        virtual VerifierDestructedData destruct_data(CCData *raw_data, CCString *secret_key) {
+            VerifierDestructedData vnd = this->divide_verification_and_data(raw_data, secret_key);
+            CCString *public_key = this->public_key_from_verification(vnd.verification, secret_key);
+            return VerifierDestructedData(public_key, vnd.verification, vnd.data);
+        }
+        virtual VerifierDestructedData destruct_first_data(CCData *raw_data, CCString *secret_key) {
+            return this->destruct_data(raw_data, secret_key);
+        }
+        virtual bool verify(VerifierDestructedData destructed, CCString *private_key, CCString *secret_key) = 0;
     };
 
     class Coder {
     public:
         virtual CCData *encode(void *data) = 0;
+        virtual void *decode(CCData *data) = 0;
     };
 
     class SessionHandler {
     public:
         virtual CCString *get_private_key(void *session) = 0;
         virtual CCString *get_public_key(void *session) = 0;
+        virtual CCInstantAuthSession *get_session_from_public_key(CCString *public_key) = 0;
     };
 
     ///--- basic implementations
@@ -63,15 +97,39 @@ namespace cocos2d { namespace extension { namespace instantauth {
         virtual CCData *encrypt_stream(CCData *data, CCString *secret_key) {
             return data;
         }
+
+        virtual CCData *decrypt_stream(CCData *data, CCString *secret_key) {
+            return data;
+        }
+        virtual CCData *decrypt_data(CCData *data, CCString *private_key, CCString *secret_key) {
+            return data;
+        }
     };
 
     class BypassVerifier: public Verifier {
+        CCString *_public_key;
     public:
+        BypassVerifier(CCString *public_key) {
+            this->_public_key = public_key;
+        }
+        ~BypassVerifier() {
+            this->_public_key->release();
+        }
         virtual CCData *encode_verification(CCString *private_key, CCString *public_key, CCString *secret_key) {
             return 0;
         }
         virtual CCData *merge_verification_data(CCData *verification, CCData *data, CCString *secret_key) {
             return data;
+        }
+
+        virtual VerifierDestructedData divide_verification_and_data(CCData *raw_data, CCString *secret_key) {
+            return VerifierDestructedData(NULL, NULL, raw_data);
+        }
+        virtual CCString *public_key_from_verification(CCString *verification, CCString *secret_key) {
+            return this->_public_key;
+        }
+        virtual bool verify(VerifierDestructedData destructed, CCString *private_key, CCString *secret_key) {
+            return true;
         }
     };
 
@@ -85,7 +143,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
             this->_key = key;
         }
         virtual ~DataKeyVerifier() {
-            delete this->_key;
+            this->_key->release();
         }
         virtual CCData *encode_verification(CCString *private_key, CCString *public_key, CCString *secret_key) {
             assert(0);
@@ -94,6 +152,18 @@ namespace cocos2d { namespace extension { namespace instantauth {
         virtual CCData *merge_verification_data(CCData *verification, CCData *data, CCString *secret_key) {
             assert(0);
             return NULL;
+        }
+
+        virtual VerifierDestructedData divide_verification_and_data(CCData *raw_data, CCString *secret_key) {
+            assert(0);
+            return VerifierDestructedData(NULL, NULL, NULL);
+        }
+        virtual CCString *public_key_from_verification(CCString *verification, CCString *secret_key) {
+            assert(0);
+            return NULL;
+        }
+        virtual bool verify(VerifierDestructedData destructed, CCString *private_key, CCString *secret_key) {
+            return destructed.verification && destructed.verification->getCString() && destructed.verification->length();
         }
     };
 
@@ -104,6 +174,10 @@ namespace cocos2d { namespace extension { namespace instantauth {
     public:
         virtual CCData *encode(void *data) {
             return (CCData *)data;
+        }
+
+        virtual void *decode(CCData *data) {
+            return (void *)data;
         }
     };
 

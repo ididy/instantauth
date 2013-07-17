@@ -43,7 +43,7 @@ class Authentication(object):
         """
         #0: raw stream
         decoded_stream = self.streamcoder.decode(data) # 1:
-        decrypted = self.cryptor.decrypt_global(decoded_stream, self.secret_key) #2
+        decrypted = self.cryptor.decrypt_stream(decoded_stream, self.secret_key) #2
         destructed = self.verifier.destruct_first_data(decrypted, self.secret_key) #3
         raw_data = self.cryptor.decrypt_first_data(destructed.data, self.secret_key) #4
         semantic_data = self.datacoder.decode(raw_data) #5
@@ -77,7 +77,7 @@ class Authentication(object):
         """
         #0: raw stream
         decoded_stream = self.streamcoder.decode(data) #1
-        decrypted = self.cryptor.decrypt_global(decoded_stream, self.secret_key) #2
+        decrypted = self.cryptor.decrypt_stream(decoded_stream, self.secret_key) #2
         destructed = self.verifier.destruct_data(decrypted, self.secret_key) #3
         if not destructed.public_key:
             raise AuthenticationError
@@ -100,7 +100,7 @@ class Authentication(object):
     def build_first_data(self, data, session_key):
         """
         Encode process:
-        
+
         | #1 Original Data | --coder--> | #2 Encoded Data | --cryptor--> | #3 Encrypted Data |
                                                                                    |
                                                                                 verifier

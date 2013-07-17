@@ -42,7 +42,7 @@ class AESCryptor(BaseCryptor):
         encrypted = cipher.encrypt(padded)
         return encrypted
 
-    def decrypt_global(self, stream, secret_key):
+    def decrypt_stream(self, stream, secret_key):
         secret_key = cut_key(secret_key, self.key_size)
         cipher = AES.new(secret_key, AES.MODE_CBC, self.iv)
         decrypted = cipher.decrypt(stream)

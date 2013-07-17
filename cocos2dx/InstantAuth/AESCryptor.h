@@ -17,6 +17,9 @@ namespace cocos2d { namespace extension { namespace instantauth {
     public:
         virtual CCData *encrypt_stream(CCData *data, CCString *secret_key);
         virtual CCData *encrypt_data(CCData *data, CCString *private_key, CCString *secret_key);
+
+        virtual CCData *decrypt_stream(CCData *data, CCString *secret_key);
+        virtual CCData *decrypt_data(CCData *data, CCString *private_key, CCString *secret_key);
     };
 
 } } }

@@ -24,16 +24,16 @@ def test_cryptor(cryptor, testcase, private_key='PRIVATE', secret='SECRET'):
         expected = case.get('global', None)
         if expected is not None:
             assert(expected == encrypted or expected == b64coder.encode(encrypted))
-        decrypted = cryptor.decrypt_global(encrypted, secret)
+        decrypted = cryptor.decrypt_stream(encrypted, secret)
         assert(decrypted == input)
-        
+
         encrypted = cryptor.encrypt_data(input, '', secret)
         expected = case.get('global', None)
         if expected is not None:
             assert(expected == encrypted or expected == b64coder.encode(encrypted))
         decrypted = cryptor.decrypt_data(encrypted, '', secret)
         assert(decrypted == input)
-        
+
         encrypted = cryptor.encrypt_data(input, private_key, secret)
         expected = case.get('data', None)
         if expected is not None:

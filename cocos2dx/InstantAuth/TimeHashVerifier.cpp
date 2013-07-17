@@ -48,4 +48,26 @@ namespace cocos2d { namespace extension { namespace instantauth {
         return mdata;
     }
 
+    VerifierDestructedData TimeHashVerifier::divide_verification_and_data(CCData *raw_data, CCString *secret_key) {
+        std::string data(raw_data->getBytes(), raw_data->getBytes() + raw_data->getSize());
+        size_t pos1 = data.find("$") + 1;
+        std::string verification1 = data.substr(0, pos1);
+        data.erase(0, pos1);
+        size_t pos2 = data.find("$");
+        std::string verification2 = data.substr(0, pos2);
+        data.erase(0, pos2 + 1);
+        return VerifierDestructedData(NULL, new CCString(verification1 + verification2), new CCData(raw_data->getBytes() + pos1 + pos2 + 1, raw_data->getSize() - (pos1 + pos2 + 1)));
+    }
+    
+    CCString *TimeHashVerifier::public_key_from_verification(CCString *verification, CCString *secret_key) {
+        std::string data = verification->m_sString;
+        size_t pos = data.find("$");
+        std::string public_key = data.substr(0, pos);
+        return new CCString(public_key);
+    }
+    
+    bool TimeHashVerifier::verify(VerifierDestructedData destructed, CCString *private_key, CCString *secret_key) {
+        return true; // FIXME: implmement here later
+    }
+    
 } } }

@@ -21,11 +21,21 @@ CCData *cap_iv(CCString *iv) {
     return new CCData(new CCData((unsigned char *)padded_iv, 16));
 }
 
+#define KEYLENGTH 32
+
 CCData *AES256Cryptor::encrypt_stream(CCData *data, CCString *secret_key) {
     const long buffer_len = data->getSize() + 16;
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
-    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), secret_key->getCString(), secret_key->length(), 0, buffer);
+    unsigned char raw_secret_key[KEYLENGTH] = {0,};
+    if (secret_key->length() >= KEYLENGTH) {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), KEYLENGTH);
+    } else {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), secret_key->length());
+    }
+    unsigned char null_iv[16] = {0,};
+
+    ssize_t size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), raw_secret_key, null_iv, buffer);
     if (size < 0) {
         free(buffer);
         return 0;
@@ -38,7 +48,55 @@ CCData *AES256Cryptor::encrypt_data(CCData *data, CCString *private_key, CCStrin
     unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
 
     CCData *iv = cap_iv(private_key);
-    long size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), secret_key->getCString(), secret_key->length(), (const unsigned char *)iv->getBytes(), buffer);
+    unsigned char raw_secret_key[KEYLENGTH] = {0,};
+    if (secret_key->length() >= KEYLENGTH) {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), KEYLENGTH);
+    } else {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), secret_key->length());
+    }
+
+    ssize_t size = encrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), raw_secret_key, (const unsigned char *)iv->getBytes(), buffer);
+    if (size < 0) {
+        free(buffer);
+        return 0;
+    }
+    assert(size % 16 == 0);
+    return new CCData(buffer, size);
+}
+
+CCData *AES256Cryptor::decrypt_stream(CCData *data, CCString *secret_key) {
+    const long buffer_len = data->getSize() + 16;
+    unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
+
+    unsigned char raw_secret_key[KEYLENGTH] = {0,};
+    if (secret_key->length() >= KEYLENGTH) {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), KEYLENGTH);
+    } else {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), secret_key->length());
+    }
+    unsigned char null_iv[16] = {0,};
+
+    ssize_t size = decrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), raw_secret_key, null_iv, buffer);
+    if (size < 0) {
+        free(buffer);
+        return 0;
+    }
+    return new CCData(buffer, size);
+}
+
+CCData *AES256Cryptor::decrypt_data(CCData *data, CCString *private_key, CCString *secret_key) {
+    const long buffer_len = data->getSize() + 16;
+    unsigned char *buffer = new unsigned char[buffer_len]; // 16 is the size of AES block
+
+    CCData *iv = cap_iv(private_key);
+    unsigned char raw_secret_key[KEYLENGTH] = {0,};
+    if (secret_key->length() >= KEYLENGTH) {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), KEYLENGTH);
+    } else {
+        memcpy(raw_secret_key, secret_key->m_sString.c_str(), secret_key->length());
+    }
+
+    ssize_t size = decrypt_aes256((const unsigned char *)data->getBytes(), data->getSize(), raw_secret_key, (const unsigned char *)iv->getBytes(), buffer);
     if (size < 0) {
         free(buffer);
         return 0;

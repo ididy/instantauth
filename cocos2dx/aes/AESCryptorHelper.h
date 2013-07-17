@@ -13,7 +13,10 @@
 extern "C" {
 #endif
 
-long encrypt_aes256(const unsigned char *src, const long len, const char *secret_key, const unsigned long secret_key_len, const unsigned char *ivec, unsigned char *dest);
+#include <sys/types.h>
+
+ssize_t encrypt_aes256(const unsigned char *src, const size_t len, const unsigned char *secret_key, const unsigned char *ivec, unsigned char *dest);
+ssize_t decrypt_aes256(const unsigned char *src, const size_t len, const unsigned char *secret_key, const unsigned char *ivec, unsigned char *dest);
 
 #ifdef __cplusplus
 }
