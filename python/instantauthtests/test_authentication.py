@@ -59,14 +59,14 @@ def test_timehash_json():
 
     d = auth.build_first_data(data, 'v')
     assert d == 'v$3b9aca008d34b0ce271d8d499ed4f44678db1175ae547b95${"field":"value"}'
-    
+
     c = auth.get_first_context(d)
     assert data == c.data
 
     d = auth.build_data(data, handler1.session_from_public_key('v'))
     assert d == 'v$3b9aca00741e96c093a4a5c230d3ea592adcabf3e055df4a${"field":"value"}'
     c = auth.get_context(d)
-    assert data == c.data 
+    assert data == c.data
 
 def test_base64_aes_timehash_json():
     data = {'field': 'value'}
@@ -74,7 +74,7 @@ def test_base64_aes_timehash_json():
 
     d = auth.build_first_data(data, 'v')
     assert d == 'wJ8UaQ0+pQm3V9Rpj+ZnmS9K9vFi9G5Lrr5Mv7oS/PvgxZSSKmu02Had5Z4CQ5AgpMR3qJ6GFshPRAjIB5v/B3eP6ILSDlyjrcgA51wlzzrVEi5uAQPHB9X742xD11lR'
-    
+
     c = auth.get_first_context(d)
     assert data == c.data
 

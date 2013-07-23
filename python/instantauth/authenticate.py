@@ -144,3 +144,6 @@ class Context(object):
     def __init__(self, session, data):
         self.session = session
         self.data = data
+
+    def __repr__(self):
+        return u'<Context({},{})>'.format(self.session, self.data)

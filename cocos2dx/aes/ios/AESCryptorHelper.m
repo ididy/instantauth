@@ -13,7 +13,7 @@
 
 ssize_t encrypt_aes256(const unsigned char *src, const size_t len, const unsigned char *secret_key, const unsigned char *ivec, unsigned char *dest) {
     size_t keyLength = kCCKeySizeAES256;
-    
+
     NSData *data = [NSData dataWithBytesNoCopy:(void *)src length:len freeWhenDone:NO];
     NSData *key = [NSData dataWithBytesNoCopy:(void *)secret_key length:keyLength freeWhenDone:NO];
 

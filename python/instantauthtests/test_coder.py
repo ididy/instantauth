@@ -15,7 +15,7 @@ json = JsonCoder()
     (constant, [('decode', 'encode')]),
     (plain, [('foo', 'foo')]),
     (surlquery, [({'f1': 'v1', 'f2': 'v2'}, 'f1=v1&f2=v2')]),
-    (json, [({'f1': 'v1', 'i': 1}, json_mod.dumps({'f1': 'v1', 'i': 1}, separators=(',',':')))]),
+    (json, [({'f1': 'v1', 'i': None}, json_mod.dumps({'f1': 'v1', 'i': None}, separators=(',',':')))]),
 ])
 def test_coder(coder, testcase, secret='SECRET'):
     """Round-trip test"""
@@ -33,4 +33,4 @@ def test_coder(coder, testcase, secret='SECRET'):
             assert expected == encoded
         decoded = coder.decode(encoded)
         assert input == decoded
-    
+
