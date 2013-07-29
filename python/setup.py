@@ -36,7 +36,6 @@ setup(
         'instantauth': ['version.txt']
     },
     install_requires=[
-        'distribute',
         'prettyexc',
     ],
 )

@@ -2402,8 +2402,7 @@
 					"DEBUG=1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
-					"fseeko64=fseeko",
-					"fopen64=fopen",
+					USE_FILE32API,
 					CC_ENABLE_CHIPMUNK_INTEGRATION,
 				);
 				HEADER_SEARCH_PATHS = (
@@ -2430,8 +2429,7 @@
 				DSTROOT = /tmp/cocos2dx.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
-					"fseeko64=fseeko",
-					"fopen64=fopen",
+					USE_FILE32API,
 					CC_ENABLE_CHIPMUNK_INTEGRATION,
 				);
 				HEADER_SEARCH_PATHS = (
