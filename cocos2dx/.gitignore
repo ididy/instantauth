@@ -2,9 +2,12 @@ build
 cocos2d-x
 rapidjson
 openssl
+Pods
+Podfile.lock
 
-*.xcodeproj/*.mode1v3                                                                      
-*.xcodeproj/*.pbxuser                                                                      
-*.xcodeproj/*.perspectivev3                                                                
+*.xcworkspace
+*.xcodeproj/*.mode1v3
+*.xcodeproj/*.pbxuser
+*.xcodeproj/*.perspectivev3
 *.xcodeproj/xcuserdata/*.xcuserdatad
 *.xcodeproj/project.xcworkspace
