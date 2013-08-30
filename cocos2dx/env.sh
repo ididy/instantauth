@@ -6,4 +6,7 @@ fi
 if [ ! -e rapidjson ]; then
     svn checkout http://rapidjson.googlecode.com/svn/trunk/ rapidjson
 fi
+if [ ! -e jsoncpp ]; then
+    svn checkout https://jsoncpp.svn.sourceforge.net/svnroot/jsoncpp/trunk/jsoncpp/ jsoncpp
+fi
 

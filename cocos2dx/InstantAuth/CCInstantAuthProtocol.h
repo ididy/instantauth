@@ -9,6 +9,8 @@
 #ifndef __InstantAuth__CCAuthentication__
 #define __InstantAuth__CCAuthentication__
 
+#include "CCData.h"
+
 namespace cocos2d { namespace extension {
 
 class CCInstantAuthSession;

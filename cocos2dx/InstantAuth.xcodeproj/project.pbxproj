@@ -221,6 +221,12 @@
 		38D22F6917BE11E10065482C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D22F6817BE11E10065482C /* CoreGraphics.framework */; };
 		38D22F7117BE11E10065482C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D22F7017BE11E10065482C /* main.m */; };
 		38D22F7517BE11E10065482C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D22F7417BE11E10065482C /* AppDelegate.m */; };
+		38D2305F17BE14BA0065482C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384FD89F16E602FB0066139A /* Foundation.framework */; };
+		38D2306A17BE14D50065482C /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D22FB417BE14580065482C /* json_reader.cpp */; };
+		38D2306B17BE14D50065482C /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D22FB617BE14580065482C /* json_value.cpp */; };
+		38D2306C17BE14D50065482C /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D22FB817BE14580065482C /* json_writer.cpp */; };
+		38D2306F17BE14EB0065482C /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D2305E17BE14BA0065482C /* libjsoncpp.a */; };
+		38D2307217BE164B0065482C /* JsonCppCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D2307017BE164B0065482C /* JsonCppCoder.cpp */; };
 		38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */; };
 		38D8079B16FB0BDC00BE9CD8 /* AESCryptorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8079A16FB0BDC00BE9CD8 /* AESCryptorHelper.m */; };
 		38DB20D2170037DB006E08D3 /* Base64Coder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38DB20D0170037DB006E08D3 /* Base64Coder.cpp */; };
@@ -241,6 +247,13 @@
 			remoteGlobalIDString = 384FD8F416E747E50066139A;
 			remoteInfo = cocos2dx;
 		};
+		38D2306D17BE14E50065482C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 384FD89416E602FB0066139A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38D2305D17BE14BA0065482C;
+			remoteInfo = jsoncpp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -255,6 +268,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		384FD8F316E747E50066139A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D2305C17BE14BA0065482C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/${PRODUCT_NAME}";
@@ -783,6 +805,28 @@
 		38D22F7217BE11E10065482C /* Placeholder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Placeholder-Prefix.pch"; sourceTree = "<group>"; };
 		38D22F7317BE11E10065482C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		38D22F7417BE11E10065482C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		38D22F9717BE14570065482C /* assertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = assertions.h; sourceTree = "<group>"; };
+		38D22F9817BE14570065482C /* autolink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		38D22F9917BE14570065482C /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		38D22F9A17BE14570065482C /* features.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		38D22F9B17BE14570065482C /* forwards.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		38D22F9C17BE14570065482C /* json.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		38D22F9D17BE14570065482C /* reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		38D22F9E17BE14570065482C /* value.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		38D22F9F17BE14570065482C /* writer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		38D22FB117BE14580065482C /* json_batchallocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		38D22FB217BE14580065482C /* json_internalarray.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		38D22FB317BE14580065482C /* json_internalmap.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		38D22FB417BE14580065482C /* json_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		38D22FB517BE14580065482C /* json_tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json_tool.h; sourceTree = "<group>"; };
+		38D22FB617BE14580065482C /* json_value.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		38D22FB717BE14580065482C /* json_valueiterator.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		38D22FB817BE14580065482C /* json_writer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		38D22FB917BE14580065482C /* sconscript */ = {isa = PBXFileReference; lastKnownFileType = text; path = sconscript; sourceTree = "<group>"; };
+		38D2305917BE14580065482C /* version */ = {isa = PBXFileReference; lastKnownFileType = text; path = version; sourceTree = "<group>"; };
+		38D2305E17BE14BA0065482C /* libjsoncpp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libjsoncpp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38D2307017BE164B0065482C /* JsonCppCoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonCppCoder.cpp; sourceTree = "<group>"; };
+		38D2307117BE164B0065482C /* JsonCppCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonCppCoder.h; sourceTree = "<group>"; };
 		38D8079316FB06E700BE9CD8 /* AESCryptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AESCryptor.cpp; sourceTree = "<group>"; };
 		38D8079416FB06E700BE9CD8 /* AESCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCryptor.h; sourceTree = "<group>"; };
 		38D8079816FB0BC300BE9CD8 /* AESCryptorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESCryptorHelper.h; sourceTree = "<group>"; };
@@ -806,6 +850,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38D2306F17BE14EB0065482C /* libjsoncpp.a in Frameworks */,
 				3860C40A17953EAF00E84019 /* QuartzCore.framework in Frameworks */,
 				384FF38716E77DD60066139A /* libcocos2dx.a in Frameworks */,
 				384FF37816E77C280066139A /* libz.dylib in Frameworks */,
@@ -838,6 +883,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38D2305B17BE14BA0065482C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D2305F17BE14BA0065482C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -849,6 +902,7 @@
 				384FD8A116E602FB0066139A /* InstantAuth */,
 				384FD8B616E602FB0066139A /* InstantAuthTests */,
 				384FD90116E748530066139A /* cocos2d-x */,
+				38D22F7F17BE14570065482C /* jsoncpp */,
 				38D22F6A17BE11E10065482C /* Placeholder */,
 				384FD89E16E602FB0066139A /* Frameworks */,
 				384FD89D16E602FB0066139A /* Products */,
@@ -863,6 +917,7 @@
 				384FD8AD16E602FB0066139A /* InstantAuthTests.octest */,
 				384FD8F516E747E50066139A /* libcocos2dx.a */,
 				38D22F6517BE11E10065482C /* Placeholder.app */,
+				38D2305E17BE14BA0065482C /* libjsoncpp.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -894,6 +949,8 @@
 				38DB20D0170037DB006E08D3 /* Base64Coder.cpp */,
 				384FD8EB16E7396C0066139A /* RapidJsonCoder.h */,
 				384FD8EA16E7396C0066139A /* RapidJsonCoder.cpp */,
+				38D2307117BE164B0065482C /* JsonCppCoder.h */,
+				38D2307017BE164B0065482C /* JsonCppCoder.cpp */,
 				384FF37116E77BC00066139A /* TimeHashVerifier.h */,
 				384FF37016E77BC00066139A /* TimeHashVerifier.cpp */,
 				38D8079416FB06E700BE9CD8 /* AESCryptor.h */,
@@ -1907,6 +1964,64 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		38D22F7F17BE14570065482C /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				38D22F9517BE14570065482C /* include */,
+				38D22FAC17BE14580065482C /* src */,
+				38D2305917BE14580065482C /* version */,
+			);
+			path = jsoncpp;
+			sourceTree = "<group>";
+		};
+		38D22F9517BE14570065482C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				38D22F9617BE14570065482C /* json */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		38D22F9617BE14570065482C /* json */ = {
+			isa = PBXGroup;
+			children = (
+				38D22F9717BE14570065482C /* assertions.h */,
+				38D22F9817BE14570065482C /* autolink.h */,
+				38D22F9917BE14570065482C /* config.h */,
+				38D22F9A17BE14570065482C /* features.h */,
+				38D22F9B17BE14570065482C /* forwards.h */,
+				38D22F9C17BE14570065482C /* json.h */,
+				38D22F9D17BE14570065482C /* reader.h */,
+				38D22F9E17BE14570065482C /* value.h */,
+				38D22F9F17BE14570065482C /* writer.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		38D22FAC17BE14580065482C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				38D22FB017BE14580065482C /* lib_json */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		38D22FB017BE14580065482C /* lib_json */ = {
+			isa = PBXGroup;
+			children = (
+				38D22FB117BE14580065482C /* json_batchallocator.h */,
+				38D22FB217BE14580065482C /* json_internalarray.inl */,
+				38D22FB317BE14580065482C /* json_internalmap.inl */,
+				38D22FB417BE14580065482C /* json_reader.cpp */,
+				38D22FB517BE14580065482C /* json_tool.h */,
+				38D22FB617BE14580065482C /* json_value.cpp */,
+				38D22FB717BE14580065482C /* json_valueiterator.inl */,
+				38D22FB817BE14580065482C /* json_writer.cpp */,
+				38D22FB917BE14580065482C /* sconscript */,
+			);
+			path = lib_json;
+			sourceTree = "<group>";
+		};
 		38D8079616FB0B9B00BE9CD8 /* aes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +2072,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				38D2306E17BE14E50065482C /* PBXTargetDependency */,
 				384FF38616E77DD10066139A /* PBXTargetDependency */,
 				384FD8B416E602FB0066139A /* PBXTargetDependency */,
 			);
@@ -1999,6 +2115,23 @@
 			productReference = 38D22F6517BE11E10065482C /* Placeholder.app */;
 			productType = "com.apple.product-type.application";
 		};
+		38D2305D17BE14BA0065482C /* jsoncpp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38D2306717BE14BA0065482C /* Build configuration list for PBXNativeTarget "jsoncpp" */;
+			buildPhases = (
+				38D2305A17BE14BA0065482C /* Sources */,
+				38D2305B17BE14BA0065482C /* Frameworks */,
+				38D2305C17BE14BA0065482C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jsoncpp;
+			productName = jsoncpp;
+			productReference = 38D2305E17BE14BA0065482C /* libjsoncpp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2023,6 +2156,7 @@
 				384FD89B16E602FB0066139A /* InstantAuth */,
 				384FD8AC16E602FB0066139A /* InstantAuthTests */,
 				384FD8F416E747E50066139A /* cocos2dx */,
+				38D2305D17BE14BA0065482C /* jsoncpp */,
 			);
 		};
 /* End PBXProject section */
@@ -2087,6 +2221,7 @@
 				38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */,
 				38D8079B16FB0BDC00BE9CD8 /* AESCryptorHelper.m in Sources */,
 				38DB20D2170037DB006E08D3 /* Base64Coder.cpp in Sources */,
+				38D2307217BE164B0065482C /* JsonCppCoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2303,6 +2438,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38D2305A17BE14BA0065482C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D2306A17BE14D50065482C /* json_reader.cpp in Sources */,
+				38D2306B17BE14D50065482C /* json_value.cpp in Sources */,
+				38D2306C17BE14D50065482C /* json_writer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2315,6 +2460,11 @@
 			isa = PBXTargetDependency;
 			target = 384FD8F416E747E50066139A /* cocos2dx */;
 			targetProxy = 384FF38516E77DD10066139A /* PBXContainerItemProxy */;
+		};
+		38D2306E17BE14E50065482C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38D2305D17BE14BA0065482C /* jsoncpp */;
+			targetProxy = 38D2306D17BE14E50065482C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2410,6 +2560,7 @@
 					"cocos2d-x/cocos2dx/kazmath/include",
 					"cocos2d-x/extensions",
 					rapidjson/include,
+					jsoncpp/include,
 				);
 				LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				OTHER_LDFLAGS = (
@@ -2438,6 +2589,7 @@
 					"cocos2d-x/cocos2dx/kazmath/include",
 					"cocos2d-x/extensions",
 					rapidjson/include,
+					jsoncpp/include,
 				);
 				LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				OTHER_LDFLAGS = (
@@ -2460,6 +2612,15 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+					jsoncpp/include,
+				);
 				INFOPLIST_FILE = "InstantAuthTests/InstantAuthTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = "Pods/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2476,6 +2637,15 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstantAuth/InstantAuth-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+					jsoncpp/include,
+				);
 				INFOPLIST_FILE = "InstantAuthTests/InstantAuthTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = "Pods/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2578,6 +2748,52 @@
 			};
 			name = Release;
 		};
+		38D2306817BE14BA0065482C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/jsoncpp.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsoncpp/jsoncpp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+					jsoncpp/include,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		38D2306917BE14BA0065482C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/jsoncpp.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsoncpp/jsoncpp-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"cocos2d-x/cocos2dx",
+					"cocos2d-x/cocos2dx/include",
+					"cocos2d-x/cocos2dx/platform/ios",
+					"cocos2d-x/cocos2dx/kazmath/include",
+					"cocos2d-x/extensions",
+					rapidjson/include,
+					jsoncpp/include,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2622,6 +2838,15 @@
 			buildConfigurations = (
 				38D22F7C17BE11E10065482C /* Debug */,
 				38D22F7D17BE11E10065482C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38D2306717BE14BA0065482C /* Build configuration list for PBXNativeTarget "jsoncpp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38D2306817BE14BA0065482C /* Debug */,
+				38D2306917BE14BA0065482C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

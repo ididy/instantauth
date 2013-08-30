@@ -1,6 +1,7 @@
 build
 cocos2d-x
 rapidjson
+jsoncpp
 openssl
 Pods
 Podfile.lock

@@ -20,6 +20,11 @@ class Authentication(object):
 
     def get_first_context(self, data, type=None):
         """
+        :param data: Stream data decodable by streamcoder
+        :param type: Authentication type
+        :return: Authentication context
+        :rtype: :class:`instantauth.authenticate.Context`
+
         Decode process:
 
         | #0 Sender-Encoded Raw Stream |
@@ -54,6 +59,10 @@ class Authentication(object):
 
     def get_context(self, data):
         """
+        :param data: Stream data decodable by streamcoder
+        :return: Authentication context
+        :rtype: :class:`instantauth.authenticate.Context`
+
         Decode process:
 
         | #0 Sender-Encoded Raw Stream |
@@ -73,7 +82,6 @@ class Authentication(object):
                                                             cryptor
                                                                V
           | #5 Receiver-Decoded Data | <--coder-- | #4 Sender-Encoded Data |
-
         """
         #0: raw stream
         decoded_stream = self.streamcoder.decode(data) #1
@@ -99,6 +107,11 @@ class Authentication(object):
 
     def build_first_data(self, data, session_key):
         """
+
+        :param data:
+        :param session_key:
+        :rtype: :class:`bytes`
+
         Encode process:
 
         | #1 Original Data | --coder--> | #2 Encoded Data | --cryptor--> | #3 Encrypted Data |
@@ -106,7 +119,6 @@ class Authentication(object):
                                                                                 verifier
                                                                                    V
                            | #5 Encrypted Packed Data | <--cryptor-- | #4 Verification-Packed Data |
-
         """
         #1 data
         coded_data = self.datacoder.encode(data) #2
@@ -118,6 +130,11 @@ class Authentication(object):
 
     def build_data(self, data, session):
         """
+
+        :param data: Structured data encodable by datacoder
+        :param session: Authentication session
+        :rtype: :class:`bytes`
+
         Encode process:
 
         | #1 Original Data | --coder--> | #2 Encoded Data | --cryptor--> | #3 Encrypted Data |
