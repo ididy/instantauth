@@ -92,15 +92,15 @@ class Authentication(object):
         try:
             session = self.session_handler.session_from_public_key(destructed.public_key)
         except KeyError:
-            raise AuthenticationError('no public key found')
+            raise AuthenticationError('No public key found', key=destructed.public_key)
         if not session:
-            raise AuthenticationError('no session found')
+            raise AuthenticationError('No session found')
 
         private_key = self.session_handler.get_private_key(session)
         raw_data = self.cryptor.decrypt_data(destructed.data, private_key, self.secret_key) #4
         semantic_data = self.datacoder.decode(raw_data) #5
         if not self.verifier.verify(destructed, private_key, self.secret_key):
-            raise AuthenticationError
+            raise AuthenticationError('Session verification failed')
         context = Context(session, semantic_data)
         self._merge_context(context)
         return context

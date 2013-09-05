@@ -216,6 +216,7 @@
 		3860C40A17953EAF00E84019 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860C40917953EAF00E84019 /* QuartzCore.framework */; };
 		3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3893C13D16EDD5EF00F7E779 /* SHA1.cpp */; };
 		38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */; };
+		38B4C76817D8184700A7184D /* CCInstantAuth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B4C76717D8184700A7184D /* CCInstantAuth.cpp */; };
 		38D22F6617BE11E10065482C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384FD8B016E602FB0066139A /* UIKit.framework */; };
 		38D22F6717BE11E10065482C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384FD89F16E602FB0066139A /* Foundation.framework */; };
 		38D22F6917BE11E10065482C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D22F6817BE11E10065482C /* CoreGraphics.framework */; };
@@ -798,6 +799,7 @@
 		3893C13E16EDD5EF00F7E779 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
 		38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCInstantAuthSession.cpp; sourceTree = "<group>"; };
 		38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCInstantAuthSession.h; sourceTree = "<group>"; };
+		38B4C76717D8184700A7184D /* CCInstantAuth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCInstantAuth.cpp; sourceTree = "<group>"; };
 		38D22F6517BE11E10065482C /* Placeholder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Placeholder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D22F6817BE11E10065482C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		38D22F6C17BE11E10065482C /* Placeholder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Placeholder-Info.plist"; sourceTree = "<group>"; };
@@ -942,8 +944,9 @@
 			isa = PBXGroup;
 			children = (
 				384FD8A416E602FB0066139A /* CCInstantAuth.h */,
-				38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */,
+				38B4C76717D8184700A7184D /* CCInstantAuth.cpp */,
 				38A5E25E16F8037300BCB89B /* CCInstantAuthSession.h */,
+				38A5E25C16F8000700BCB89B /* CCInstantAuthSession.cpp */,
 				384FD8D916E669C50066139A /* CCInstantAuthProtocol.h */,
 				38DB20D1170037DB006E08D3 /* Base64Coder.h */,
 				38DB20D0170037DB006E08D3 /* Base64Coder.cpp */,
@@ -2218,6 +2221,7 @@
 				384FF37216E77BC00066139A /* TimeHashVerifier.cpp in Sources */,
 				3893C14216EDD5EF00F7E779 /* SHA1.cpp in Sources */,
 				38A5E25D16F8000700BCB89B /* CCInstantAuthSession.cpp in Sources */,
+				38B4C76817D8184700A7184D /* CCInstantAuth.cpp in Sources */,
 				38D8079516FB06E700BE9CD8 /* AESCryptor.cpp in Sources */,
 				38D8079B16FB0BDC00BE9CD8 /* AESCryptorHelper.m in Sources */,
 				38DB20D2170037DB006E08D3 /* Base64Coder.cpp in Sources */,

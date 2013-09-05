@@ -96,6 +96,41 @@ public:
     TimeHashVerifier timehashVerifier;
 }
 
+- (void)testBase64 {
+    Coder *coder = new Base64Coder();
+
+    std::vector<std::string> encases;
+    #define P(X, Y) { encases.push_back(X); encases.push_back(Y); }
+
+    P("", "");
+    P("f", "Zg==");
+    P("fo", "Zm8=");
+    P("foo", "Zm9v");
+    P("foob", "Zm9vYg==");
+    P("fooba", "Zm9vYmE=");
+    P("foobar", "Zm9vYmFy");
+    
+    P("A", "QQ==");
+    P("AB", "QUI=");
+    P("ABC", "QUJD");
+    P("ABCdef", "QUJDZGVm");
+    P("123$%^7", "MTIzJCVeNw==");
+
+    for (int i = 0; i < encases.size(); i ++) {
+        if (i % 2 == 1) continue;
+        std::string& input = encases[i];
+        std::string& solution = encases[i + 1];
+        CCData *inputData = new CCData((unsigned char *)input.c_str(), input.size());
+        CCData *result = coder->encode(inputData);
+        std::string output(result->getBytes(), result->getBytes() + result->getSize());
+        STAssertTrue(strcmp(output.c_str(), solution.c_str()) == 0, @"out: %s expected: %s", output.c_str(), solution.c_str());
+
+        CCData *revert = (CCData *)coder->decode(result);
+        std::string roundtrip(revert->getBytes(), revert->getBytes() + revert->getSize());
+        STAssertTrue(strcmp(input.c_str(), roundtrip.c_str()) == 0, @"out: %s expected: %s", output.c_str(), solution.c_str());
+    }
+}
+
 - (void)testAESCryptor {
     Coder *base64 = new Base64Coder();
     CCString *secret = new CCString("SECRET");

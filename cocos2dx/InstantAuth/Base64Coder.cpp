@@ -50,7 +50,7 @@ namespace cocos2d { namespace extension { namespace instantauth {
         CCData *idata = (CCData *)data;
         long inlen = idata->getSize();
         if (inlen == 0) {
-            return 0;
+            return new CCData(0, 0);
         }
         long roughlen = (inlen * 4) / 3;
         long outlen = 4 * ((roughlen / 4) + ((roughlen % 4) != 0));
