@@ -18,7 +18,7 @@ class Authentication(object):
         for k, v in self.datacoder.derived_context.items():
             setattr(context, k, v)
 
-    def get_first_context(self, data, type=None):
+    def get_first_context(self, data, type=None, **params):
         """
         :param data: Stream data decodable by streamcoder
         :param type: Authentication type
@@ -53,7 +53,7 @@ class Authentication(object):
         raw_data = self.cryptor.decrypt_first_data(destructed.data, self.secret_key) #4
         semantic_data = self.datacoder.decode(raw_data) #5
         context = Context(None, semantic_data)
-        context.session = self.session_handler.session_from_session_key(destructed.public_key, type)
+        context.session = self.session_handler.session_from_session_key(destructed.public_key, type, **params)
         self._merge_context(context)
         return context
 
