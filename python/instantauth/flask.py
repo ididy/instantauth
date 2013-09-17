@@ -16,10 +16,10 @@ class FlaskAuthentication(Authentication):
         flask.request.session = context.session
         return context
 
-    def from_first_request(self, type=None):
+    def from_first_request(self, type=None, **params):
         raw_data = flask.request.data
         data = self.session_handler.decode_data(raw_data)
-        context = self.get_first_context(data, type)
+        context = self.get_first_context(data, type, **params)
         flask.request.form = context.data
         flask.request.session = context.session
         return context
