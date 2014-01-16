@@ -48,8 +48,9 @@ class TimeHashVerifier(Verifier):
             raise AuthenticationHashInvalid
         given_time = int(timehex, 16)
         self.derived_context = {'time': given_time}
-        if not -self.__pastlimit <= self.now() - given_time <= self.__futurelimit:
-            raise AuthenticationExpired
+        now = self.now()
+        if not -self.__pastlimit <= now - given_time <= self.__futurelimit:
+            raise AuthenticationExpired(now=now, given=given_time, diff=now - given_time, past_limit=self.__pastlimit, future_limit=self.__futurelimit)
         return True
 
     def merge_verification_data(self, verification, raw_data, secret_key):
